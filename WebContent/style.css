@@ -1,0 +1,32 @@
+body {
+}
+
+a {
+  text-decoration: underline;
+  color: black;
+}
+
+.wrapper {
+  width: 800px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.header {
+  width: 800px;
+}
+
+.header-logo {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+}
+
+.header-login {
+  text-align: right;
+  height: 45px;
+}
+
+.header-menu {
+  text-align: center;
+}
