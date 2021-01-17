@@ -64,7 +64,7 @@ function cngPsize(num) {
 		<option value="priced" <% if (ord.equals("priced")) { %>selected="selected"<% } %>>높은 가격순</option>
 		<option value="dated" <% if (ord.equals("dated")) { %>selected="selected"<% } %>>신상품</option>
 		<option value="salecntd" <% if (ord.equals("salecntd")) { %>selected="selected"<% } %>>인기상품</option>
-	</select><!-- 체크박스선택시 바로 서브밋 어떻게...? -->
+	</select><!-- 체크박스선택시 바로 서브밋 어떻게...??? -->
 </td>
 </tr>
 <tr><td colspan="4" align="center">
