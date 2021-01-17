@@ -45,6 +45,10 @@ function cngPsize(num) {
 	document.frmSch.psize.value = num;
 	document.frmSch.submit();
 }
+
+function ordSubmit(obj) {
+	obj.submit();
+}
 </script>
 </head>
 <body>
@@ -57,21 +61,16 @@ function cngPsize(num) {
 	<img src="/3mall/images/v12-1.png" width="20px" onclick="cngPsize('12')" align="absmiddle"/>
 	<input type="hidden" name="psize" value="6">
 &nbsp;&nbsp;
-	<select name="ord">
+	<select name="ord" onchange="ordSubmit(this.form)">
 		<option value="" <% if (ord.equals("")) { %>selected="selected"<% } %>>상품 정렬</option>
 		<option value="namea" <% if (ord.equals("namea")) { %>selected="selected"<% } %>>상품명</option>
 		<option value="pricea" <% if (ord.equals("pricea")) { %>selected="selected"<% } %>>낮은 가격순</option>
 		<option value="priced" <% if (ord.equals("priced")) { %>selected="selected"<% } %>>높은 가격순</option>
 		<option value="dated" <% if (ord.equals("dated")) { %>selected="selected"<% } %>>신상품</option>
 		<option value="salecntd" <% if (ord.equals("salecntd")) { %>selected="selected"<% } %>>인기상품</option>
-	</select><!-- 체크박스선택시 바로 서브밋 어떻게...??? -->
+	</select>
 </td>
 </tr>
-<tr><td colspan="4" align="center">
-	<input type="submit" value="상품 검색" />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="reset" value="조건 초기화" />
-</td></tr>
 </table>
 </form>
 <br /><br />
@@ -91,7 +90,7 @@ if (pdtList != null && rcnt > 0) {	// 검색결과가 있으면
 <td>
 	<div class="pdtBox<%=max%>">
 		<%=lnk %><img src="/3mall/product/pdt_img/<%=pdtList.get(i).getPl_mainimg() %>" width="<%=max == 3 ? 250 : 180 %>" height="<%=max == 3 ? 180 : 150 %>" /></a><br />
-		<%=lnk + pdtList.get(i).getPl_name() %></a><%=soldout %><br />판매가 : <%=price %> (1일)
+		<%=lnk + pdtList.get(i).getPl_name() %></a><%=soldout %><br />판매가 : <%=price %> 원 (1일)
 	</div>
 </td>
 <%
