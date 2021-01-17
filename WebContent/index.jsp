@@ -19,7 +19,6 @@ if (loginMember == null) {
 <%
 } else { %>
 <%=loginMember.getMlid() %>(<%=loginMember.getMlname() %>)님 환영합니다.<br />
-현재 <%=loginMember.getMlpoint() %>p 보유중<br />
 <a href="logout">로그아웃</a>
 <%
 }
