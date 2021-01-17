@@ -40,31 +40,31 @@ td { font-size:11; }
 .pdtBox3 { width:266px; height:250px; border:1px solid black; }
 .pdtBox4 { width:195px; height:200px; border:1px solid black; }
 </style>
+<script>
+function cngPsize(num) {
+	document.frmSch.psize.value = num;
+	document.frmSch.submit();
+}
+</script>
 </head>
 <body>
 <h2>상품 목록 화면</h2>
 <form name="frmSch" action="" method="get">
 <table width="800" cellpadding="5">
 <tr>
-<th>정렬방식</th>
-<td>
+<td align="right">
+	<img src="/3mall/images/v6-1.png" width="20px" onclick="cngPsize('6')" align="absmiddle"/>&nbsp;
+	<img src="/3mall/images/v12-1.png" width="20px" onclick="cngPsize('12')" align="absmiddle"/>
+	<input type="hidden" name="psize" value="6">
+&nbsp;&nbsp;
 	<select name="ord">
-		<option value="" <% if (ord.equals("")) { %>selected="selected"<% } %>>상품아이디(오름차순)</option>
-		<option value="namea" <% if (ord.equals("namea")) { %>selected="selected"<% } %>>상품명(오름차순)</option>
-		<option value="pricea" <% if (ord.equals("pricea")) { %>selected="selected"<% } %>>낮은 가격순(오름차순)</option>
-		<option value="priced" <% if (ord.equals("priced")) { %>selected="selected"<% } %>>높은 가격순(내림차순)</option>
-		<option value="datea" <% if (ord.equals("datea")) { %>selected="selected"<% } %>>오래된 등록일순(오름차순)</option>
-		<option value="dated" <% if (ord.equals("dated")) { %>selected="selected"<% } %>>최근 등록일순(내림차순)</option>
-		<option value="salecntd" <% if (ord.equals("salecntd")) { %>selected="selected"<% } %>>많이 팔린순(내림차순)</option>
-		<option value="reviewd" <% if (ord.equals("reviewd")) { %>selected="selected"<% } %>>리뷰 개수순(내림차순)</option>
-	</select>
-</td>
-<th>페이지 크기</th>
-<td>
-	<select name="psize">
-		<option value="12" <% if (psize == 12) { %>selected="selected"<% } %>>12 개</option>
-		<option value="6" <% if (psize == 6) { %>selected="selected"<% } %>>6 개</option>
-	</select> 씩 보여주기
+		<option value="" <% if (ord.equals("")) { %>selected="selected"<% } %>>상품 정렬</option>
+		<option value="namea" <% if (ord.equals("namea")) { %>selected="selected"<% } %>>상품명</option>
+		<option value="pricea" <% if (ord.equals("pricea")) { %>selected="selected"<% } %>>낮은 가격순</option>
+		<option value="priced" <% if (ord.equals("priced")) { %>selected="selected"<% } %>>높은 가격순</option>
+		<option value="dated" <% if (ord.equals("dated")) { %>selected="selected"<% } %>>신상품</option>
+		<option value="salecntd" <% if (ord.equals("salecntd")) { %>selected="selected"<% } %>>인기상품</option>
+	</select><!-- 체크박스선택시 바로 서브밋 어떻게...? -->
 </td>
 </tr>
 <tr><td colspan="4" align="center">

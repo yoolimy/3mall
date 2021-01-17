@@ -80,7 +80,7 @@ function showImg(imgName) {
 <tr><td colspan="2" align="center">
 	<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="780" /><br /><br />
 	<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="780" /><br /><br />
-	<%=pdtInfo.getPl_deInfo() %>
+	<%=pdtInfo.getPl_deInfo() != null ? pdtInfo.getPl_deInfo() : "" %>
 </td></tr>
 <tr><td colspan="2" align="center"><hr width="100%" /></td></tr>
 <tr><td colspan="2" align="center">

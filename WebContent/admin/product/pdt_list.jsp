@@ -177,10 +177,10 @@ if (pdtList != null && rcnt > 0) {	// 검색결과가 있으면
 <th width="10%">상품분류</th>
 <th width="10%">상품코드</th>
 <th width="10%">상품사진</th>
-<th width="15%">상품명</th>
+<th width="*%">상품명</th>
 <th width="10%">가격</th>
-<th width="*%">재고<br />[총 수량 / 대여중 수량]</th>
-<th width="10%">상품상태</th>
+<th width="10%">상태</th>
+<th width="10%">공개여부</th>
 </tr>
 <%
 int seq = rcnt - (10 * (cpage - 1));	// 현재 페이지에서의 시작번호

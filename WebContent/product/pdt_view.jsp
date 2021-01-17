@@ -121,7 +121,7 @@ function howMuch(d) {
 	</td></tr>
 	</table>
 </td>
-<td width="*" valign="top"><!-- 상품명, 옵션, 가격, 재고량, 할인율, 등록일, 원가, 판매량, 관리자 번호 -->
+<td width="*" valign="top">
 	<table width="100%" cellpadding="8">
 	<tr>
 	<td width="100">분류</td>
@@ -161,7 +161,7 @@ function howMuch(d) {
 <tr><td colspan="2" align="center">
 	<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="780" /><br /><br />
 	<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="780" /><br /><br />
-	<%=pdtInfo.getPl_deInfo() %>
+	<%=pdtInfo.getPl_deInfo() != null ? pdtInfo.getPl_deInfo() : "" %>
 </td></tr>
 <tr><td colspan="2" align="center"><hr width="100%" /></td></tr>
 <tr><td colspan="2" align="center">
