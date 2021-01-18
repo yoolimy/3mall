@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="java.time.*" %>
 <%@ page import="vo.*" %>
 <%
 MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
@@ -10,11 +11,13 @@ int cpage = Integer.parseInt(request.getParameter("cpage"));
 int psize = Integer.parseInt(request.getParameter("psize"));
 
 //검색조건 및 정렬조건 쿼리스트링을 받음
-String id, isview, schtype, keyword, bcata, scata, stre, pop;
+String id, isview, schtype, keyword, bcata, scata, stre, pop, rentDate;
 id		= request.getParameter("id");		isview	= request.getParameter("isview");
 schtype = request.getParameter("schtype");	keyword = request.getParameter("keyword");
 bcata	= request.getParameter("bcata");	scata	= request.getParameter("scata");
 stre	= request.getParameter("stre");		pop		= request.getParameter("pop");
+rentDate= request.getParameter("rentDate");
+if (rentDate == null) rentDate = "1";
 
 String args = "?cpage=" + cpage + "&psize=" + psize;
 if (isview != null && !isview.equals(""))	args += "&isview=" + isview;
@@ -39,6 +42,7 @@ if (request.getParameter("y") == null) {	// 받아온 연도와 월이 없으면
 	year = Integer.parseInt(request.getParameter("y"));
 	month = Integer.parseInt(request.getParameter("m"));
 }
+int price = pdtInfo.getPl_price() * Integer.parseInt(rentDate);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -80,10 +84,6 @@ function hideSchedule(cal) {
 	var obj = document.getElementById(cal);
 	obj.style.display = "none";
 }
-function add(x, y) {
-	var sum = x + y;
-	return sum;
-}
 
 function sbmtDate(date) { 
 	var plusDate = parseInt(document.frmPdt.rentDate.value);
@@ -98,8 +98,8 @@ function sbmtDate(date) {
 	document.getElementById('cal').style.display = "none";
 }
 
-function howMuch(d) {
-	document.getElementById("won").innerHTML = <%=pdtInfo.getPl_price() %> * d + " 원";
+function howMuch() {
+	document.frmPdt.submit();
 }
 </script>
 </head>
@@ -130,16 +130,16 @@ function howMuch(d) {
 	<tr><td>상품명</td><td><%=pdtInfo.getPl_name() %></td></tr>
 	<tr><td>가격</td><td><%=pdtInfo.getPl_price() %>(1일 기준)</td></tr>
 	<tr><td>상세정보</td><td><%=pdtInfo.getPl_detail() != null? pdtInfo.getPl_detail().replace(",", "<br /> ") : "" %>
-	<form name="frmPdt" action="" method="post">
+	<form name="frmPdt" action="pdt_view.pdt<%=args %>&id=<%=id %>" method="post">
 	<input type="hidden" name="id" value="<%=id %>" />
 	<input type="hidden" name="args" value="<%=args %>" />
 	<input type="hidden" name="price" value="" />
 	</td></tr>
 	<tr><td>대여 일수</td>
 	<td>
-		<input type="radio" name="rentDate" value="1" checked="checked" onclick="howMuch(1)"/> 1일 &nbsp;&nbsp;&nbsp;
-		<input type="radio" name="rentDate" value="3"  onclick="howMuch(3)"/> 3일 &nbsp;&nbsp;&nbsp;
-		<input type="radio" name="rentDate" value="7" onclick="howMuch(7)" /> 7일 &nbsp;&nbsp;&nbsp;
+		<input type="radio" name="rentDate" value="1" <%if (rentDate.equals("1")) { %>checked="checked" <%} %> onclick="howMuch()"/> 1일 &nbsp;&nbsp;&nbsp;
+		<input type="radio" name="rentDate" value="3" <%if (rentDate.equals("3")) { %>checked="checked" <%} %> onclick="howMuch()"/> 3일 &nbsp;&nbsp;&nbsp;
+		<input type="radio" name="rentDate" value="7" <%if (rentDate.equals("7")) { %>checked="checked" <%} %> onclick="howMuch()" /> 7일 &nbsp;&nbsp;&nbsp;
 	</td>
 	</tr>
 	<tr><td>날짜 선택</td><td>	
@@ -147,7 +147,7 @@ function howMuch(d) {
 	<input type="text" name="edate" id="edate" class="date" /> 까지
 	</td></tr>
 	<tr><td colspan="2" align="right">
-	<p id="won"><%=pdtInfo.getPl_price() %> 원</p>
+	<%=price %> 원
  	<tr><td colspan="2" align="center">
 	<input type="button" value="장바구니에 담기" onclick="goCart();" />
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -222,6 +222,7 @@ if (startWeekDay != 1) {
 	}
 }
 
+String disabled = "";
 String txtClass = null, txtID = null, sql = null;
 String strMonth = month < 10 ? "0" + month : "" + month;
 for (int i = 1, n = startWeekDay ; i <= endDay ; i++, n++ ){
@@ -235,10 +236,19 @@ for (int i = 1, n = startWeekDay ; i <= endDay ; i++, n++ ){
 
 	String day = i + "";
 	String mon = month + "";
+	
+	String[] srents = pdtInfo.getPl_srent().split("-");
+	String[] erents = pdtInfo.getPl_erent().split("-");
+	LocalDate srent = LocalDate.of(Integer.parseInt(srents[0]), Integer.parseInt(srents[1]), Integer.parseInt(srents[2]));
+	LocalDate erent = LocalDate.of(Integer.parseInt(erents[0]), Integer.parseInt(erents[1]), Integer.parseInt(erents[2]));
+	
 	if (i < 10 )	day = "0" + Integer.toString(i); 
 	if (month < 10 ) mon = "0" + Integer.toString(month);
-	out.print("<td valign='center'" + txtClass + txtID + ">" + 
-	"<input type='button' onclick='sbmtDate(\""+ year + "-" + mon + "-" + day + "\")' value='"+ i + "' id='buttons'/></td>");
+	LocalDate today = LocalDate.of(year, month, i);
+	if (srent.minusDays(Integer.parseInt(rentDate)).equals(today))	disabled = "disabled='disabled'";
+	if (erent.equals(today))	disabled = "";
+	out.print("<td valign='center'>" + 
+	"<input type='button' onclick='sbmtDate(\""+ year + "-" + mon + "-" + day + "\")' value='"+ i + "' id='buttons' " + disabled + " /></td>");
 
 	if (n % 7 == 0)	out.println("</tr>");
 	// 일주일이 지났으므로 다음 줄로 내림

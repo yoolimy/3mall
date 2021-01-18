@@ -177,6 +177,8 @@ public class PdtDao {
 					pdtInfo.setPl_img1(rs.getString("pl_img1"));
 					pdtInfo.setPl_img2(rs.getString("pl_img2"));
 					pdtInfo.setPl_rent(rs.getInt("pl_rent"));
+					pdtInfo.setPl_srent(rs.getString("pl_srent"));
+					pdtInfo.setPl_erent(rs.getString("pl_erent"));
 					pdtInfo.setPl_salecnt(rs.getInt("pl_salecnt"));
 					pdtInfo.setPl_review(rs.getInt("pl_review"));
 					pdtInfo.setPl_view(rs.getString("pl_view"));

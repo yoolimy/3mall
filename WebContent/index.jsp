@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.time.*" %>
 <%@ page import="vo.*" %>
 <%
 MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
