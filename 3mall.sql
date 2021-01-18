@@ -136,7 +136,7 @@ from t_product_list a, t_cata_big b, t_cata_small c
 where a.cs_idx = c.cs_idx and b.cb_idx = c.cb_idx and a.pl_id = '1044pdt001' ;
 update t_product_list set cs_idx = '1066', pl_name = '여성한복 2', pl_price = '33000', pl_opt1 = 'Size,44,55,66', pl_opt2 = '', pl_opt3 = '', pl_mainimg = 'null', pl_img1 = 'w3-1.JPG', pl_img2 = 'w3-2.JPG', pl_stock = '3', pl_detail = 'null', pl_deInfo = 'null', pl_view = 'y' where pl_id = '1066pdt001';
 insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, al_idx, pl_srent, pl_erent) 
-values (1 , 1044, '예쁜 한복', '20000', '한복.jpg', '1', '2020-01-18', '2020-01-21');
+values ('1044pdt001' , 1044, '예쁜 한복', '20000', '한복.jpg', '1', '2021-01-18', '2021-01-21');
 -- 상품 주문
 create table t_cart_list(
 	cl_idx int auto_increment primary key,		-- 일련번호
