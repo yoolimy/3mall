@@ -1,73 +1,101 @@
 package vo;
 
-// 한 명의 회원정보를 저장하기 위한 클래스
 public class MemberInfo {
-	private String mlid, mlpwd, mlname, mlgender, mlbirth, mlphone, mlemail, mldate, mllast, mlstatus;
-	private int mlpoint;
-	public String getMlid() {
-		return mlid;
+	private String ml_id, ml_pwd, ml_name, ml_gender, ml_birth, ml_phone, ml_email, ml_agremail, ml_date, ml_last, ml_status, ml_memo;
+
+	public String getMl_id() {
+		return ml_id;
 	}
-	public void setMlid(String mlid) {
-		this.mlid = mlid;
+
+	public void setMl_id(String ml_id) {
+		this.ml_id = ml_id;
 	}
-	public String getMlpwd() {
-		return mlpwd;
+
+	public String getMl_pwd() {
+		return ml_pwd;
 	}
-	public void setMlpwd(String mlpwd) {
-		this.mlpwd = mlpwd;
+
+	public void setMl_pwd(String ml_pwd) {
+		this.ml_pwd = ml_pwd;
 	}
-	public String getMlname() {
-		return mlname;
+
+	public String getMl_name() {
+		return ml_name;
 	}
-	public void setMlname(String mlname) {
-		this.mlname = mlname;
+
+	public void setMl_name(String ml_name) {
+		this.ml_name = ml_name;
 	}
-	public String getMlgender() {
-		return mlgender;
+
+	public String getMl_gender() {
+		return ml_gender;
 	}
-	public void setMlgender(String mlgender) {
-		this.mlgender = mlgender;
+
+	public void setMl_gender(String ml_gender) {
+		this.ml_gender = ml_gender;
 	}
-	public String getMlbirth() {
-		return mlbirth;
+
+	public String getMl_birth() {
+		return ml_birth;
 	}
-	public void setMlbirth(String mlbirth) {
-		this.mlbirth = mlbirth;
+
+	public void setMl_birth(String ml_birth) {
+		this.ml_birth = ml_birth;
 	}
-	public String getMlphone() {
-		return mlphone;
+
+	public String getMl_phone() {
+		return ml_phone;
 	}
-	public void setMlphone(String mlphone) {
-		this.mlphone = mlphone;
+
+	public void setMl_phone(String ml_phone) {
+		this.ml_phone = ml_phone;
 	}
-	public String getMlemail() {
-		return mlemail;
+
+	public String getMl_email() {
+		return ml_email;
 	}
-	public void setMlemail(String mlemail) {
-		this.mlemail = mlemail;
+
+	public void setMl_email(String ml_email) {
+		this.ml_email = ml_email;
 	}
-	public String getMldate() {
-		return mldate;
+	
+	public String getMl_agremail() {
+		return ml_agremail;
 	}
-	public void setMldate(String mldate) {
-		this.mldate = mldate;
+
+	public void setMl_agremail(String ml_agremail) {
+		this.ml_agremail = ml_agremail;
 	}
-	public String getMllast() {
-		return mllast;
+
+	public String getMl_date() {
+		return ml_date;
 	}
-	public void setMllast(String mllast) {
-		this.mllast = mllast;
+
+	public void setMl_date(String ml_date) {
+		this.ml_date = ml_date;
 	}
-	public String getMlstatus() {
-		return mlstatus;
+
+	public String getMl_last() {
+		return ml_last;
 	}
-	public void setMlstatus(String mlstatus) {
-		this.mlstatus = mlstatus;
+
+	public void setMl_last(String ml_last) {
+		this.ml_last = ml_last;
 	}
-	public int getMlpoint() {
-		return mlpoint;
+
+	public String getMl_status() {
+		return ml_status;
 	}
-	public void setMlpoint(int mlpoint) {
-		this.mlpoint = mlpoint;
+
+	public void setMl_status(String ml_status) {
+		this.ml_status = ml_status;
+	}
+
+	public String getMl_memo() {
+		return ml_memo;
+	}
+
+	public void setMl_memo(String ml_memo) {
+		this.ml_memo = ml_memo;
 	}
 }
