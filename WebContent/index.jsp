@@ -26,8 +26,7 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <a href="login_form.jsp">로그인</a>
                 <%
                 } else { %>
-                <%=loginMember.getMlid() %>(<%=loginMember.getMlname() %>)님 환영합니다.<br />
-               	 현재 <%=loginMember.getMlpoint() %>p 보유중<br />
+                <%=loginMember.getMl_id() %>(<%=loginMember.getMl_name() %>)님 환영합니다.<br /> 
                 <a href="logout">로그아웃</a>
                 <%
                 }
@@ -41,6 +40,8 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <a href="pdt_list.pdt?bcata=1">여성한복</a>
                 <a href="pdt_list.pdt?bcata=2">남성한복</a>
                 <a href="pdt_list.pdt?bcata=3">장신구</a><br />
+                <hr />
+                <a href="member_list.amem">회원 목록</a>
             </div>
         </div>
         <div class="main">
