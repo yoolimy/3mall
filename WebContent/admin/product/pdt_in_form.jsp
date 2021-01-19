@@ -69,11 +69,59 @@ function setCategory(obj, target) {
 		// 새롭게 만들어진 콤보박스에서 첫번째 option이 선택된 상태로 있게 함
 	}
 }
+
+var imgCheck = true;
+function imagecheck(image) {
+	img = image.slice(image.indexOf(".")+1).toLowerCase();
+
+	if (img!="jpg" && img!="png" && img!="gif" &&img!="bmp") {
+		alert("이미지파일만 등록 가능합니다");	
+		imgCheck = false;
+	} else {
+		imgCheck = true;
+	}
+}
+function chkData(frm) {
+	var bCata = frmPdt.bCata.value;			var sCata = frmPdt.sCata.value;
+	var name = frmPdt.name.value;			var price = frmPdt.price.value;
+	var mainimg = frmPdt.mainimg.mainimg;	
+
+
+	if (bCata == "")	{
+		 alert("대분류를 선택하세요");		frmPdt.bCata.focus();	 return false;
+	}
+	if (sCata == "")	{
+		 alert("소분류를 선택하세요");		frmPdt.sCata.focus();	 return false;
+	}
+	if (name == "")	{
+		 alert("상품명을 입력하세요.");		frmPdt.name.focus();	 return false;
+	}
+	if (price == "")	{
+		alert("가격을 입력하세요.");			frmPdt.price.focus();	 return false;
+	}
+	
+	if (mainimg == "")	{
+		alert("메인이미지는 반드시 등록해야 합니다.");		 return false;
+	}
+
+	if (!imgCheck) {
+		alert("확장자를 확인하세요.");	frmPdt.mainimg.value="";
+		frmPdt.img1.value="";	frmPdt.img2.value="";	return false;
+	}
+
+	return true;
+}
+
+function onlyNum(obj) {
+		if (isNaN(obj.value)) {
+			obj.value = "";
+	}
+}
 </script>
 </head>
 <body>
 <h2>상품 등록 폼</h2>
-<form name="frmPdt" action="pdt_in_proc.pdta" method="post" enctype="multipart/form-data">
+<form name="frmPdt" action="pdt_in_proc.pdta" method="post" enctype="multipart/form-data" onsubmit="return chkData(this);">
 <table width="600" cellpadding="5" >
 <tr>
 <th width="25%">분류</th>
@@ -100,7 +148,7 @@ function setCategory(obj, target) {
 <th>상품명</th><td><input type="text" name="name" /></td>
 </tr>
 <tr>
-<th>가격</th><td><input type="text" name="price" />원 </td>| 
+<th>가격</th><td><input type="text" name="price" onkeyup="onlyNum(this);"/>원 </td>| 
 </tr>
 <tr>
 <th>상품상세정보</th><td><input type="text" name="detail" placeholder="Ex) 가슴둘레 115cm,바지길이 112cm"/></td>
@@ -109,13 +157,13 @@ function setCategory(obj, target) {
 <th>상품상세설명</th><td><input type="text" name="deInfo" /></td>
 </tr>
 <tr>
-<th>상품메인사진</th><td><input type="file" name="mainimg" /></td>
+<th>상품메인사진</th><td><input type="file" name="mainimg" onchange="imagecheck(this.value);"/></td>
 </tr>
 <tr>
-<th>상품 상세사진1</th><td><input type="file" name="img1" /></td>
+<th>상품 상세사진1</th><td><input type="file" name="img1" onchange="imagecheck(this.value);"/></td>
 </tr>
 <tr>
-<th>상품 상세사진2</th><td><input type="file" name="img2" /><br />
+<th>상품 상세사진2</th><td><input type="file" name="img2" onchange="imagecheck(this.value);"/><br />
 최대 5MB 이하의 (JPG, JPEG, GIF, PNG) 파일만 가능합니다.</td>
 </tr>
 <tr><td colspan="4" align="right">

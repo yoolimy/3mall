@@ -236,17 +236,19 @@ for (int i = 1, n = startWeekDay ; i <= endDay ; i++, n++ ){
 
 	String day = i + "";
 	String mon = month + "";
+	if (i < 10 )	day = "0" + Integer.toString(i); 
+	if (month < 10 ) mon = "0" + Integer.toString(month);
+	LocalDate today = LocalDate.of(year, month, i);
 	
+	if (pdtInfo.getPl_srent() != null) {
 	String[] srents = pdtInfo.getPl_srent().split("-");
 	String[] erents = pdtInfo.getPl_erent().split("-");
 	LocalDate srent = LocalDate.of(Integer.parseInt(srents[0]), Integer.parseInt(srents[1]), Integer.parseInt(srents[2]));
 	LocalDate erent = LocalDate.of(Integer.parseInt(erents[0]), Integer.parseInt(erents[1]), Integer.parseInt(erents[2]));
 	
-	if (i < 10 )	day = "0" + Integer.toString(i); 
-	if (month < 10 ) mon = "0" + Integer.toString(month);
-	LocalDate today = LocalDate.of(year, month, i);
 	if (srent.minusDays(Integer.parseInt(rentDate)).equals(today))	disabled = "disabled='disabled'";
 	if (erent.equals(today))	disabled = "";
+	}
 	out.print("<td valign='center'>" + 
 	"<input type='button' onclick='sbmtDate(\""+ year + "-" + mon + "-" + day + "\")' value='"+ i + "' id='buttons' " + disabled + " /></td>");
 
