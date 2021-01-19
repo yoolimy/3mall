@@ -47,31 +47,39 @@ create table t_admin_etc (
 );
 
 
--- 회원목록 테이블
-create table t_member_list (	
-	ml_id varchar(20) primary key,	-- 회원ID
-	ml_pwd varchar(20)	not null,		-- 비밀번호
-	ml_name	varchar(20) not null,	-- 이름
-	ml_gender char(1)	not null,		-- 성별
-	ml_birth char(10) not null,		-- 생일
-	ml_phone varchar(13) not null,	-- 전화번호
-	ml_email varchar(50) not null,	-- 이메일
-	ml_date	datetime default now(),	-- 가입일
-	ml_last	datetime default now(),	-- 최종로그인
-	ml_status char(1) default 'a',		-- 상태
-	al_memo	varchar(200)		-- 관리자 메모
+-- 회원목록 테이블	
+create table t_member_list (											-- 21.01.19 변아영 수정
+	ml_id varchar(20) primary key,			-- 회원ID
+	ml_pwd varchar(20)	not null,			-- 비밀번호
+	ml_name	varchar(20) not null,			-- 이름
+	ml_gender char(1)	not null,			-- 성별
+	ml_birth char(10) not null,				-- 생일
+	ml_phone varchar(13) not null,			-- 전화번호
+	ml_email varchar(50) not null,			-- 이메일
+    ml_agremail char(1) default 'y',		-- 이메일 수신 여부(y:수신 동의 / n:수신 미동의)
+	ml_date	datetime default now(),			-- 가입일
+	ml_last	datetime default now(),			-- 최종로그인
+	ml_status char(1) default 'a',			-- 상태
+	ml_memo	varchar(200)					-- 관리자 메모 -- 수정
 );
-create table t_member_addr (			
+select * from t_member_list;
+-- insert into t_member_list(ml_id, ml_pwd, ml_name, ml_gender, ml_birth, ml_phone, ml_email, ml_agremail, ml_status) values ('test1', '1234', '홍길동', 'F', '19930728', '010-1234-5789', 'test1@naver.com', 'y', 'a');
+-- insert into t_member_list(ml_id, ml_pwd, ml_name, ml_gender, ml_birth, ml_phone, ml_email, ml_status) values ('test2', '1234', '전우치', 'M', '19931004', '010-1234-5789', 'test2@gmail.com', 'n', 'a');
+
+create table t_member_addr (											-- 21.01.19 변아영 수정
 	ma_idx int auto_increment primary key,	-- 주소번호
-	ml_id varchar(20) not null,			-- 회원 ID
-	ma_zip char(5) not null,			-- 우편번호
-	ma_addr1 varchar(50) not null,		-- 주소1
-	ma_addr2 varchar(50) not null,		-- 주소2
-	ma_basic char(1) default 'n',			-- 기본주소여부
-	ma_date	datetime default now(),		-- 등록일
+	ml_id varchar(20) not null,				-- 회원 ID
+	ma_zip char(5) not null,				-- 우편번호
+	ma_addr1 varchar(50) not null,			-- 주소1
+	ma_addr2 varchar(50) not null,			-- 주소2
+	ma_basic char(1) default 'y',			-- 기본주소여부
+	ma_date	datetime default now(),			-- 등록일
     constraint fk_addr_ml_id foreign key (ml_id)
 		references t_member_list(ml_id) 	-- 회원id 외래키 지정
 );
+select * from t_member_addr;
+-- insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('test1', 12345, '서울시 은평구', '푸르지오아파드 222동 101호', 'y');
+-- insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('test2', 54321, '경기도 수원시 ', '벽산아파트 333동 1201호', 'n');
 
 	
 -- 상품 테이블
