@@ -27,7 +27,7 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <%
                 } else { %>
                 <%=loginMember.getMlid() %>(<%=loginMember.getMlname() %>)님 환영합니다.<br />
-               	 현재 <%=loginMember.getMlpoint() %>p 보유중<br />
+               	<!--  현재 <%=loginMember.getMlpoint() %>p 보유중<br /> -->
                 <a href="logout">로그아웃</a>
                 <%
                 }
@@ -40,7 +40,8 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <hr />
                 <a href="pdt_list.pdt?bcata=1">여성한복</a>
                 <a href="pdt_list.pdt?bcata=2">남성한복</a>
-                <a href="pdt_list.pdt?bcata=3">장신구</a><br />
+                <a href="pdt_list.pdt?bcata=3">장신구</a>
+                <a href="review_list.review">리뷰 게시판</a>
             </div>
         </div>
         <div class="main">
