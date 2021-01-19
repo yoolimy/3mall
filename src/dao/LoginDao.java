@@ -49,17 +49,16 @@ public class LoginDao {
 				loginMember = new MemberInfo();
 				// 로그인한 회원정보를 저장할 loginMember인스턴스 생성
 
-				loginMember.setMlid(uid);
-				loginMember.setMlpwd(pwd);
-				loginMember.setMlname(rs.getString("ml_name"));
-				loginMember.setMlgender(rs.getString("ml_gender"));
-				loginMember.setMlbirth(rs.getString("ml_birth"));
-				loginMember.setMlphone(rs.getString("ml_phone"));
-				loginMember.setMlemail(rs.getString("ml_email"));
-				loginMember.setMldate(rs.getString("ml_date"));
-				loginMember.setMllast(rs.getString("ml_last"));
-				loginMember.setMlstatus("a");
-				loginMember.setMlpoint(rs.getInt("ml_point"));
+				loginMember.setMl_id(uid);
+				loginMember.setMl_pwd(pwd);
+				loginMember.setMl_name(rs.getString("ml_name"));
+				loginMember.setMl_gender(rs.getString("ml_gender"));
+				loginMember.setMl_birth(rs.getString("ml_birth"));
+				loginMember.setMl_phone(rs.getString("ml_phone"));
+				loginMember.setMl_email(rs.getString("ml_email"));
+				loginMember.setMl_date(rs.getString("ml_date"));
+				loginMember.setMl_last(rs.getString("ml_last"));
+				loginMember.setMl_status("a");
 				// MemberInfo클래스의 인스턴스 loginMember에 회원정보를 저장
 			}
 			// 로그인 실패시에는 loginMember에 따로 데이터를 담지 않고 null로 리턴
