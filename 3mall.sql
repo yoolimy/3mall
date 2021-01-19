@@ -49,33 +49,34 @@ create table t_admin_etc (
 
 
 -- 회원목록 테이블
-create table t_member_list (	
-	ml_id varchar(20) primary key,	-- 회원ID
-	ml_pwd varchar(20)	not null,		-- 비밀번호
-	ml_name	varchar(20) not null,	-- 이름
-	ml_gender char(1)	not null,		-- 성별
-	ml_birth char(10) not null,		-- 생일
-	ml_phone varchar(13) not null,	-- 전화번호
-	ml_email varchar(50) not null,	-- 이메일
-	ml_date	datetime default now(),	-- 가입일
-	ml_last	datetime default now(),	-- 최종로그인
-	ml_status char(1) default 'a',		-- 상태
-	al_memo	varchar(200)		-- 관리자 메모
+create table t_member_list (   
+	ml_id varchar(20) primary key,		-- 회원ID
+	ml_pwd varchar(20)   not null,		-- 비밀번호
+	ml_name   varchar(20) not null,		-- 이름
+	ml_gender char(1)   not null,			-- 성별
+	ml_birth char(10) not null,			-- 생일
+	ml_phone varchar(13) not null,		-- 전화번호
+	ml_email varchar(50) not null,		-- 이메일
+	ml_agremail char(1) default 'y',		-- 이메일 수신 여부(y:수신 동의 / n:수신 미동의)
+	ml_date   datetime default now(),		-- 가입일
+	ml_last   datetime default now(),		-- 최종로그인
+	ml_status char(1) default 'a',         -- 상태
+	ml_memo   varchar(200)               	-- 관리자 메모 -- 수정
 );
 select * from t_member_list;
 insert into t_member_list (ml_id, ml_pwd, ml_name, ml_gender, ml_birth, ml_phone, ml_email)
 	values ('test1', '1234', '홍길동', 'm', '1980-01-01', '010-1234-5678', 'test1@testMall.com');
 
-create table t_member_addr (			
+create table t_member_addr (         
 	ma_idx int auto_increment primary key,	-- 주소번호
-	ml_id varchar(20) not null,			-- 회원 ID
+	ml_id varchar(20) not null,		-- 회원 ID
 	ma_zip char(5) not null,			-- 우편번호
-	ma_addr1 varchar(50) not null,		-- 주소1
-	ma_addr2 varchar(50) not null,		-- 주소2
-	ma_basic char(1) default 'n',			-- 기본주소여부
-	ma_date	datetime default now(),		-- 등록일
+	ma_addr1 varchar(50) not null,	-- 주소1
+	ma_addr2 varchar(50) not null,	-- 주소2
+	ma_basic char(1) default 'y',		-- 기본주소여부
+	ma_date   datetime default now(),	-- 등록일
     constraint fk_addr_ml_id foreign key (ml_id)
-		references t_member_list(ml_id) 	-- 회원id 외래키 지정
+      references t_member_list(ml_id)	-- 회원id 외래키 지정
 );
 
 	

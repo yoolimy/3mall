@@ -45,6 +45,7 @@ a:focus { color:#f00; text-decoration:underline; }
 </style>
 </head>
 <body>
+<h2>리뷰 게시판</h2>
 <form name="frmSch" method="get">
 <table width="700" cellpadding="5">
 <tr>
