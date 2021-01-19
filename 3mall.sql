@@ -135,8 +135,8 @@ create table t_product_list (
 	constraint fk_pl_al_idx foreign key (al_idx)
 		references t_admin_list(al_idx) 	-- 관리자idx 외래키 지정
 );
-insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, al_idx) 
-values ('1066pdt001', 1066, '여성한복 2', '33000', '한복.jpg', 'w3-1.jpg', 'w3-2.jpg', '2020-01-18', '2020-01-21', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1066pdt001', 1066, '여성한복 2', '33000', '한복.jpg', 'w3-1.jpg', 'w3-2.jpg', '2020-01-18', '2020-01-21', 'y', '1');
 select * from t_product_list;
 
 -- 상품 주문
@@ -206,4 +206,54 @@ create table t_review_list (
 );
 insert into t_review_list (rl_idx, pl_id, ml_id, rl_title, rl_content, rl_img) values (1, '1066pdt001', 'test1', '제품 좋아요', '좋아요', '한복.jpg');
 select * from t_review_list;
+
+-- insert(products) 210119
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1066pdt001', 1066, '여성한복 w1', '33000', 'w1-1.jpg', 'w1-2.jpg', 'w1-3.jpg', '2020-01-18', '2020-01-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1066pdt002', 1066, '여성한복 w2', '43000', 'w2-1.jpg', 'w2-2.jpg', 'w2-3.jpg', '2020-01-18', '2020-01-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1066pdt003', 1066, '여성한복 w3', '23000', 'w3-1.jpg', 'w3-2.jpg', 'w3-3.jpg', '2020-01-18', '2020-01-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1066pdt004', 1066, '여성한복 w4', '55000', 'w4-1.jpg', 'w4-2.jpg', 'w4-3.jpg', '2020-01-18', '2020-01-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1066pdt005', 1066, '여성한복 w5', '60000', 'w5-1.jpg', 'w5-2.jpg', 'w5-3.jpg', '2020-01-18', '2020-01-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1066pdt006', 1066, '여성한복 w6', '34000', 'w6-1.jpg', 'w6-2.jpg', 'w6-3.jpg', '2020-01-18', '2020-01-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1055pdt001', 1055, '여성한복 w7', '22000', 'w7-1.jpg', 'w7-2.jpg', 'w7-3.jpg', '2020-01-18', '2020-01-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1055pdt002', 1055, '여성한복 w8', '32000', 'w8-1.jpg', 'w8-2.jpg', 'w8-3.jpg', '2020-01-18', '2020-01-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_view, al_idx) 
+values ('1055pdt003', 1055, '여성한복 w9', '33000', 'w9-1.jpg', 'w9-2.jpg', 'w9-3.jpg', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_view, al_idx) 
+values ('1055pdt004', 1055, '여성한복 w10', '29000', 'w10-1.jpg', 'w10-2.jpg', 'w10-3.jpg', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1044pdt001', 1066, '여성한복 w11', '27000', 'w11-1.jpg', 'w11-2.jpg', 'w11-3.jpg', '2021-01-21', '2021-01-28', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1044pdt002', 1044, '여성한복 w12', '21000', 'w12-1.jpg', 'w12-2.jpg', 'w12-3.jpg', '2021-02-01', '2021-02-08', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1044pdt003', 1044, '여성한복 w13', '34000', 'w13-1.jpg', 'w13-2.jpg', 'w13-3.jpg', '2021-02-18', '2021-02-21', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1044pdt004', 1044, '여성한복 w14', '43000', 'w14-1.jpg', 'w14-2.jpg', '', '2021-01-25', '2021-01-28', 'y', '1');
+insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, pl_view, al_idx) 
+values ('1044pdt005', 1044, '여성한복 w15', '59000', 'w15-1.jpg', 'w15-2.jpg', 'w15-3.jpg', '2021-01-21', '2021-01-28', 'y', '1');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

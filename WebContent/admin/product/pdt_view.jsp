@@ -49,14 +49,14 @@ function showImg(imgName) {
 <td width="40%" align="center" valign="middle">
 	<table width="100%">
 	<tr><td align="center" valign="middle">
-		<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_mainimg() %>" width="400" height="480" id="bigImg" />
+		<img src="product/pdt_img/<%=pdtInfo.getPl_mainimg() %>" width="400" height="480" id="bigImg" />
 	</td></tr>
 	<tr><td align="center" valign="middle" id="thImg">
-		<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_mainimg() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_mainimg() %>');" />
+		<img src="product/pdt_img/<%=pdtInfo.getPl_mainimg() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_mainimg() %>');" />
 <% if (pdtInfo.getPl_img1() != null && !pdtInfo.getPl_img1().equals("")) { %>
-		<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="100" height="120"  onclick="showImg('<%=pdtInfo.getPl_img1() %>');" /><% } %>
+		<img src="product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="100" height="120"  onclick="showImg('<%=pdtInfo.getPl_img1() %>');" /><% } %>
 <% if (pdtInfo.getPl_img2() != null && !pdtInfo.getPl_img2().equals("")) { %>
-		<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_img2() %>');" /><% } %>
+		<img src="product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_img2() %>');" /><% } %>
 	</td></tr>
 	</table>
 </td>
@@ -78,8 +78,8 @@ function showImg(imgName) {
 </tr>
 <tr><td colspan="2" align="center"><hr width="100%" /></td></tr>
 <tr><td colspan="2" align="center">
-	<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="780" /><br /><br />
-	<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="780" /><br /><br />
+	<img src="product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="780" /><br /><br />
+	<img src="product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="780" /><br /><br />
 	<%=pdtInfo.getPl_deInfo() != null ? pdtInfo.getPl_deInfo() : "" %>
 </td></tr>
 <tr><td colspan="2" align="center"><hr width="100%" /></td></tr>
