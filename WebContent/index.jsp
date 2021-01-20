@@ -44,6 +44,8 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <a href="review_list.review">리뷰 게시판</a>
                 <hr />
                 <a href="member_list.amem">회원 목록</a>
+                <hr />
+                <a href="main.jsp">메인화면</a>
             </div>
         </div>
         <div class="main">
