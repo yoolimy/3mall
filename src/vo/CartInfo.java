@@ -1,44 +1,31 @@
 package vo;
 
 public class CartInfo {
-	private int cl_idx, cl_cnt, price;
-	private String cl_buyer, pl_id, cl_opt, cl_sdate, cl_edate, cl_date, pl_name, pl_mainimg;
-	
+	private int cl_idx, pl_price;
+	private String ml_id, pl_id, cl_sdate, cl_edate, cl_date, pl_name, pl_mainimg, price, cl_rdate;
 	public int getCl_idx() {
 		return cl_idx;
 	}
 	public void setCl_idx(int cl_idx) {
 		this.cl_idx = cl_idx;
 	}
-	public int getCl_cnt() {
-		return cl_cnt;
+	public int getPl_price() {
+		return pl_price;
 	}
-	public void setCl_cnt(int cl_cnt) {
-		this.cl_cnt = cl_cnt;
+	public void setPl_price(int pl_price) {
+		this.pl_price = pl_price;
 	}
-	public int getPrice() {
-		return price;
+	public String getMl_id() {
+		return ml_id;
 	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public String getCl_buyer() {
-		return cl_buyer;
-	}
-	public void setCl_buyer(String cl_buyer) {
-		this.cl_buyer = cl_buyer;
+	public void setMl_id(String ml_id) {
+		this.ml_id = ml_id;
 	}
 	public String getPl_id() {
 		return pl_id;
 	}
 	public void setPl_id(String pl_id) {
 		this.pl_id = pl_id;
-	}
-	public String getCl_opt() {
-		return cl_opt;
-	}
-	public void setCl_opt(String cl_opt) {
-		this.cl_opt = cl_opt;
 	}
 	public String getCl_sdate() {
 		return cl_sdate;
@@ -70,4 +57,17 @@ public class CartInfo {
 	public void setPl_mainimg(String pl_mainimg) {
 		this.pl_mainimg = pl_mainimg;
 	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getCl_rdate() {
+		return cl_rdate;
+	}
+	public void setCl_rdate(String cl_rdate) {
+		this.cl_rdate = cl_rdate;
+	}
+	
 }
