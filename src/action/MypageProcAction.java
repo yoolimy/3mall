@@ -37,8 +37,6 @@ public class MypageProcAction implements Action {
 		String secondAddr1 = request.getParameter("secondAddr1");
 		String secondAddr2 = request.getParameter("secondAddr2");
 		
-		System.out.println(request.getParameter("idxB"));
-		System.out.println(request.getParameter("idxS"));
 		MypageProcSvc mypageProcSvc = new MypageProcSvc();
 		
 		
