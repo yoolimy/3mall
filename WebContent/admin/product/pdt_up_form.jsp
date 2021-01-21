@@ -87,7 +87,7 @@ function imagecheck(image) {
 function chkData(frm) {
 	var bCata = frmPdt.bCata.value;			var sCata = frmPdt.sCata.value;
 	var name = frmPdt.name.value;			var price = frmPdt.price.value;
-	var mainimg = frmPdt.mainimg.mainimg;	
+	var mainimg = frmPdt.mainimg.value;	
 
 
 	if (bCata == "")	{
