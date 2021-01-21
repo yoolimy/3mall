@@ -46,6 +46,8 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <a href="member_list.amem">회원 목록</a>
                 <hr />
                 <a href="main.jsp">메인화면</a>
+                <hr />
+                <a href="cart_list.ord">장바구니</a>
             </div>
         </div>
         <div class="main">

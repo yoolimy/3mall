@@ -60,7 +60,7 @@ function showImg(imgName) {
 	</td></tr>
 	</table>
 </td>
-<td width="*"><!-- 상품명, 가격, 옵션, 재고량, 대여중, 판매량, 관리자 번호 -->
+<td width="*"><!-- 상품명, 가격, 대여중, 판매량, 등록일, 등록자 -->
 	<table width="100%" cellpadding="8">
 	<tr>
 	<td width="100">분류</td>

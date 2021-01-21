@@ -139,19 +139,22 @@ insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img
 values ('1066pdt001', 1066, '여성한복 2', '33000', '한복.jpg', 'w3-1.jpg', 'w3-2.jpg', '2020-01-18', '2020-01-21', 'y', '1');
 select * from t_product_list;
 
--- 상품 주문
+-- 상품 주문 (2021-01-21 최유림 수정)
 create table t_cart_list(
 	cl_idx int auto_increment primary key,		-- 일련번호
-	cl_buyer varchar(20) not null,		-- 회원ID 
-	pl_id char(10) not null,			-- 상품ID
-	cl_opt varchar(100),				-- 선택한 옵션
-	cl_cnt int default 1,				-- 선택한 수량
-	cl_sdate	varchar(10) not null,		-- 대여시작일			
-	cl_edate varchar(10) not null,			-- 대여끝나는일
-	cl_date datetime default now(),		-- 등록일
+	ml_id varchar(20) not null,					-- 회원ID 
+	pl_id char(10) not null,					-- 상품ID
+    cl_rdate int default 1 not null,			-- 대여일(1일, 3일, 7일)
+	cl_sdate varchar(10) not null,				-- 대여시작일			
+	cl_edate varchar(10) not null,				-- 대여끝나는일
+	cl_date datetime default now(),				-- 등록일
+    constraint fk_cl_ml_id foreign key (ml_id) 
+		references t_member_list(ml_id), 		-- 회원id 외래키 지정
 	constraint fk_cl_pl_id foreign key (pl_id)
 			references t_product_list(pl_id)	-- 상품 id 외래키 지정
 );
+select * from t_cart_list;
+
 create table t_order_list (
 	ol_id char(15) primary key,		-- 주문ID
 	ol_buyer varchar(20) not null, 	-- 회원ID 

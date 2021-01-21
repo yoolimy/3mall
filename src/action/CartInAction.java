@@ -10,30 +10,21 @@ public class CartInAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String plid = request.getParameter("id");		// 상품아이디
-		String cnt = request.getParameter("cnt");		// 구매 수량
 		String price = request.getParameter("price");	// 실구매가
-		int optCnt = 0;
-		String optValue = "";
-		if (request.getParameter("optCnt") != null) {
-			optCnt = Integer.parseInt(request.getParameter("optCnt"));	// 옵션의 개수
-			for (int i = 0 ; i < optCnt ; i++) {
-				optValue += "," + request.getParameter("opt" + i);
-			}
-			optValue = optValue.substring(1);
-		}
+		String sdate = request.getParameter("sdate");	// 대여 시작일
+		String edate = request.getParameter("edate");	// 대여 종료일
+		String rdate = request.getParameter("rentDate");	// 대여일
 
-		String buyer = null;
 		HttpSession session = request.getSession();
 		MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
-		if (loginMember != null) {
-			buyer = loginMember.getMlid();
-		}
-		
 		CartInfo cart = new CartInfo();
-		cart.setCl_buyer(buyer);
 		cart.setPl_id(plid);
-		cart.setCl_opt(optValue);
-		cart.setCl_cnt(Integer.parseInt(cnt));
+		cart.setPrice(price);
+		cart.setCl_sdate(sdate);
+		cart.setCl_edate(edate);
+		cart.setCl_rdate(rdate);
+		cart.setMl_id(loginMember.getMl_id());
+
 		
 		CartInSvc cartInSvc = new CartInSvc();
 		int result = cartInSvc.cartInsert(cart);
@@ -41,7 +32,7 @@ public class CartInAction implements Action {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('재고량을 초과하여 장바구니에 담기가 실패했습니다.');");
+			out.println("alert('장바구니에 담기가 실패했습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();

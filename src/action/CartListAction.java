@@ -12,14 +12,22 @@ public class CartListAction implements Action {
 			request.setCharacterEncoding("utf-8");
 			ArrayList<CartInfo> cartList = new ArrayList<CartInfo>();
 
-			String where = "";
+			String mlId = "";
 			HttpSession session = request.getSession();
 			MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
 			if (loginMember != null) {
-				where = " and c.cl_buyer = '" + loginMember.getMlid() + "' ";
+				mlId = loginMember.getMl_id();
+			} else {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인 후 사용할 수 있습니다.');");
+				out.println("history.back();");
+				out.println("</script>");
+				out.close();
 			}
 			CartListSvc cartListSvc = new CartListSvc();
-			cartList = cartListSvc.getCartList(where);
+			cartList = cartListSvc.getCartList(mlId);
 			request.setAttribute("cartList", cartList);
 
 			ActionForward forward = new ActionForward();

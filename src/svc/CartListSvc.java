@@ -7,12 +7,12 @@ import dao.*;
 import vo.*;
 
 public class CartListSvc {
-	public ArrayList<CartInfo> getCartList(String where) {
+	public ArrayList<CartInfo> getCartList(String mlId) {
 		ArrayList<CartInfo> cartList = null;
 		Connection conn = getConnection();
 		OrdDao ordDao = OrdDao.getInstance();
 		ordDao.setConnection(conn);
-		cartList = ordDao.getCartList(where);
+		cartList = ordDao.getCartList(mlId);
 		close(conn);
 
 		return cartList;
