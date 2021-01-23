@@ -38,7 +38,7 @@ PdtInfo pdtInfo = (PdtInfo)request.getAttribute("pdtInfo");
 <script>
 function showImg(imgName) {
 	var bigImg = document.getElementById("bigImg");
-	bigImg.src = "/3mall/product/pdt_img/" + imgName;
+	bigImg.src = "./product/pdt_img/" + imgName;
 }
 </script>
 </head>
