@@ -24,30 +24,58 @@ public class MemberDao {
 		this.conn = conn;
 	}
 
-	public int joinInsert(MemberInfo memberInfo) {
+	public int JoinInsert(MemberInfo memberInfo) {
 	// 회원가입을 위한 메소드
 		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			String sql = "insert into t_member_list(ml_id, ml_pwd, ml_name, ml_gender, ml_birth, ml_phone, ml_email, ml_agremail) values (?, ?, ?, ?, ? ,?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberInfo.getMl_id());
+			pstmt.setString(2, memberInfo.getMl_pwd());
+			pstmt.setString(3, memberInfo.getMl_name());
+			pstmt.setString(4, memberInfo.getMl_gender());
+			pstmt.setString(5, memberInfo.getMl_birth());
+			pstmt.setString(6, memberInfo.getMl_phone());
+			pstmt.setString(7, memberInfo.getMl_email());
+			pstmt.setString(8, memberInfo.getMl_agremail());
+			result = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("JoinInsert() 오류");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		return result;
+	}
+	public int JoinAddrInsert(String id, MemberAddrInfo memberAddrInfo) {
+	// 회원가입 주소 등록을 위한 메소드
+		int idx = 1, result = 0;
+		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			String sql = "insert into t_member_list(ml_id, ml_pwd, ml_name, ml_gender, ml_birth, ml_phone, ml_email) values (?, ?, ?, ?, ? ,?, ?)";
-				if (rs.next()) {
-					
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, memberInfo.getMl_id());
-				pstmt.setString(2, memberInfo.getMl_pwd());
-				pstmt.setString(3, memberInfo.getMl_name());
-				pstmt.setString(4, memberInfo.getMl_gender());
-				pstmt.setString(5, memberInfo.getMl_birth());
-				pstmt.setString(6, memberInfo.getMl_phone());
-				pstmt.setString(7, memberInfo.getMl_email());
-				
-				}
+			stmt = conn.createStatement();
+			String sql = "select max(ma_idx) + 1 from t_member_addr ";
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				idx = rs.getInt(1);
+			}
+			sql = "insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values (?, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, memberAddrInfo.getMa_zip());
+			pstmt.setString(3, memberAddrInfo.getMa_addr1());
+			pstmt.setString(4, memberAddrInfo.getMa_addr2());
+			pstmt.setString(5, memberAddrInfo.getMa_basic());
 			result = pstmt.executeUpdate();	// 새로운 회원 등록
 			
 		} catch(Exception e) {
-			System.out.println("JoinInsert() 오류");
+			System.out.println("JoinAddrInsert() 오류");
 			e.printStackTrace();
 		} finally {
 			close(rs);	
@@ -65,7 +93,6 @@ public class MemberDao {
 		try {
 			stmt = conn.createStatement();
 			sql = "select * from t_member_list where ml_id = '" + id + "' ";
-			System.out.println(sql);
 			
 			rs = stmt.executeQuery(sql);
 			if (rs.next()) {
@@ -161,7 +188,6 @@ public class MemberDao {
 					" ma_basic = '" + memberAddrInfo.getMa_basic() + "' where ma_idx = '" + memberAddrInfo.getMa_idx() + "' ";
 			stmt = conn.createStatement();
 			result = stmt.executeUpdate(sql);
-		System.out.println(sql);	
 		} catch(Exception e) {
 			System.out.println("getMypageUpdate() 오류");
 			e.printStackTrace();
@@ -187,7 +213,6 @@ public class MemberDao {
 			}
 			sql = "insert into t_member_addr (ma_idx, ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) " + 
 			" values (?, ?, ?, ?, ?, ?)";
-			System.out.println(sql);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			pstmt.setString(2, id);
@@ -195,8 +220,6 @@ public class MemberDao {
 			pstmt.setString(4, memberAddrList.getMa_addr1());
 			pstmt.setString(5, memberAddrList.getMa_addr2());
 			pstmt.setString(6, memberAddrList.getMa_basic());
-			
-			
 			result = pstmt.executeUpdate();
 			// 새로운 게시글 등록
 			
