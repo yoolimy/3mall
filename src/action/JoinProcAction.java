@@ -52,7 +52,7 @@ public class JoinProcAction implements Action {
 		
 
 		MemberAddrInfo memberAddrInfo = new MemberAddrInfo();
-		if (!"".equals(basicAddr) && basicAddr != null) {
+		if (!"".equals(zip) && zip != null) {
 			basicAddr = "y";
 			memberAddrInfo.setMa_zip(zip);
 			memberAddrInfo.setMa_addr1(addr1);
@@ -61,7 +61,6 @@ public class JoinProcAction implements Action {
 		}
 		
 		boolean isSuccess = joinProcSvc.JoinInsert(memberInfo);
-		boolean isClear = joinProcSvc.JoinAddrInsert(id, memberAddrInfo);
 		
 		if (!isSuccess) {	// 회원가입에 실패했으면
 			response.setContentType("text/html; charset=utf-8");
@@ -72,14 +71,18 @@ public class JoinProcAction implements Action {
 			out.println("</script>");
 			out.close();
 		}
-		if (!isClear) {	// 회원가입 주소 등록에 실패했으면
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('회원가입 주소 등록이 실패했습니다.');");
-			out.println("history.back();");
-			out.println("</script>");
-			out.close();
+		
+		if (!"".equals(zip) && zip != null) {
+			boolean isClear = joinProcSvc.JoinAddrInsert(id, memberAddrInfo);
+			if (!isClear) {	// 회원가입 주소 등록에 실패했으면
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('회원가입 주소 등록이 실패했습니다.');");
+				out.println("history.back();");
+				out.println("</script>");
+				out.close();
+			}
 		}
 		forward.setPath("login_form.jsp");
 		

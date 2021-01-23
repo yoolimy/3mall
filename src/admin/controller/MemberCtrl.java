@@ -33,9 +33,9 @@ public class MemberCtrl extends HttpServlet {
 
 		// 사용자의 요청 종류에 따라 각각 다른 action을 취함
 		switch (command) {
-			case "/member_list.amem" :			// 회원 목록 화면
+			case "/member_list.amem" :				// 회원 목록 화면
 				action = new MemberListAction();		break;
-			case "/member_view.amem" :			// 회원 상세 목록 화면
+			case "/member_view.amem" :				// 회원 상세 목록 화면
 				action = new MemberViewAction();		break;
 			case "/member_up_proc.amem" :			// 회원 수정 기능
 				action = new MemberUpProcAction();		break;

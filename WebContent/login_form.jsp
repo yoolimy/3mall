@@ -4,8 +4,8 @@
 <%
 
 MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
-
 request.setCharacterEncoding("utf-8");
+
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,7 +18,7 @@ function chkData(chk) {
 	var uid = chk.uid.value;
 	var pwd = chk.pwd.value;
 	
-/*	if (uid == "") {
+	if (uid == "") {
 		alert("아이디를 입력해주세요.");
 		chk.uid.focus();
 		return false;
@@ -28,8 +28,9 @@ function chkData(chk) {
 		chk.pwd.focus();
 		return false;
 	}
-*/
+
 }
+
 </script>
 </head>
 <body>

@@ -52,4 +52,19 @@ public class MypageProcSvc {
 		close(conn);
 		return isSuccess;
 	}
+	public boolean getMypageAddrDelete(String id, MemberAddrInfo memberAddrList) {
+		boolean isSuccess = false;
+		Connection conn = getConnection();
+		MemberDao memberDao = MemberDao.getInstance();
+		memberDao.setConnection(conn);
+		int result = memberDao.getMypageAddrDelete(id, memberAddrList);
+		if (result > 0) {
+			isSuccess = true;
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return isSuccess;
+	}
 }

@@ -163,8 +163,6 @@ public class MemberDao {
 					" ml_gender = '" + mypageInfo.getMl_gender() + "' " + 
 					" where ml_id = '" + mypageInfo.getMl_id() + "' "; 
 			
-			System.out.println(sql);
-			
 			stmt = conn.createStatement();
 			result = stmt.executeUpdate(sql);
 			
@@ -177,7 +175,7 @@ public class MemberDao {
 		return result;
 	}
 	public int getMypageAddrUpdate(MemberAddrInfo memberAddrInfo) {
-		// 회원 주소 정보 수정 처리를 위한 메소드
+	// 마이페이지 회원 주소 정보 수정 처리를 위한 메소드
 		int result = 0;
 		Statement stmt = null;
 		
@@ -197,7 +195,7 @@ public class MemberDao {
 		return result;
 	}
 	public int getMypageInsert(String id, MemberAddrInfo memberAddrList) {
-	// 회원 주소 정보 등록처리를 위한 메소드
+	// 마이페이지 회원 주소 정보 등록처리를 위한 메소드
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;		// 등록할 게시글의 번호를 얻기 위한 ResultSet
 		int idx = 1, result = 0;	// 새로운 글번호와 쿼리 실행 결과 개수를 저장할 변수
@@ -231,6 +229,27 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+	public int getMypageAddrDelete(String id, MemberAddrInfo memberAddrList) {
+	// 마이페이지 회원 주소 삭제를 위한 메소드
+		int result = 0;
+		Statement stmt = null;
+		String sql = null;
+
+		try {
+			sql = "delete from t_member_addr where ma_idx = '" + memberAddrList.getMa_idx() + "' ";
+
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+			
+		} catch(Exception e) {
+			System.out.println("getMypageAddrDelete() 오류");
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+
 		return result;
 	}
 }

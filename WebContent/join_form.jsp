@@ -62,14 +62,6 @@ function execDaumPostcode() {
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('postcode').value = data.zonecode;
             document.getElementById("roadAddress").value = roadAddr;
-            document.getElementById("jibunAddress").value = data.jibunAddress;
-            
-            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-            if(roadAddr !== ''){
-                document.getElementById("extraAddress").value = extraRoadAddr;
-            } else {
-                document.getElementById("extraAddress").value = '';
-            }
 
             var guideTextBox = document.getElementById("guide");
             // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
@@ -136,11 +128,16 @@ function onlyNumber(obj) {
 	</tr>
 	<tr>
 		<th>비밀번호<%=img %></th>
-		<td><input type="password" name="pwd" /></td>
+		<td><input type="password" name="pwd" id="pwd1" onchange="testPwd1();" /><br />
+			<span id="chkPwd">비밀번호는 6~20자 이내의 영문, 숫자 조합으로 입력하세요.</span>
+		</td>
 	</tr>
 	<tr>
 		<th>비밀번호 확인<%=img %></th>
-		<td><input type="password" name="pwd2" /></td>
+		<td>
+			<input type="password" name="pwd2" id="pwd2" onchange="testPwd2();"/><br />
+			<span id="pwdMsg"></span>
+		</td>
 	</tr>
 	<tr>
 		<th>전화번호<%=img %></th>
@@ -208,15 +205,12 @@ function onlyNumber(obj) {
 	<tr>
 		<th>주소1</th>
 		<td>
-			
-			<input type="text" name="zip" id="postcode" placeholder="우편번호">
-			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+			<input type="text" name="zip" id="postcode" placeholder="우편번호" />
+			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" />
 			<input type="radio" name="basicAddr" value="first" checked="checked"/>&nbsp;기본배송지<br />
-			<input type="text" name="addr1" id="roadAddress" placeholder="도로명주소"><br />
-			<input type="text" id="jibunAddress" placeholder="지번주소">
+			<input type="text" name="addr1" id="roadAddress" placeholder="도로명주소" /><br />
 			<span id="guide" style="color:#999;display:none;font-size:5px;"></span>
-			<input type="text" name="addr2" id="detailAddress" placeholder="상세주소">
-			<input type="text" id="extraAddress" placeholder="참고항목">
+			<input type="text" name="addr2" id="detailAddress" placeholder="상세주소" />
 		</td>
 	</tr>
 	<tr>

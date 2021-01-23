@@ -54,6 +54,13 @@ if (memberInfo.getMl_agremail().equals("y")) {
 	agrEmail = "비동의";
 }
 
+//성별
+String genderMF = "";
+if (memberInfo.getMl_gender().equals("M")) {
+	genderMF = "남자";
+} else {
+	genderMF = "여자";
+}
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -72,7 +79,7 @@ if (memberInfo.getMl_agremail().equals("y")) {
 		<th width="20%">아이디</th>
 		<td><%=id %></td>
 		<th width="20%">성별</th>
-		<td><%=memberInfo.getMl_gender() %></td>
+		<td><%=genderMF %></td>
 	</tr>
 	<tr>
 		<th>이름</th>

@@ -29,10 +29,62 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="javascript/mypageScript.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+
+//우편번호 찾기
+function execDaumPostcode(num) {
+ new daum.Postcode({
+     oncomplete: function(data) {
+         // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+         // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+         // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+         var roadAddr = data.roadAddress; // 도로명 주소 변수 1
+         var extraRoadAddr = ''; // 참고 항목 변수
+
+         // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+         // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+         if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+             extraRoadAddr += data.bname;
+         }
+         // 건물명이 있고, 공동주택일 경우 추가한다.
+         if(data.buildingName !== '' && data.apartment === 'Y'){
+            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+         }
+         // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+         if(extraRoadAddr !== ''){
+             extraRoadAddr = ' (' + extraRoadAddr + ')';
+         }
+
+         // 우편번호와 주소 정보를 해당 필드에 넣는다.
+         document.getElementById('postcode' + num).value = data.zonecode;
+         document.getElementById("roadAddress" + num).value = roadAddr;
+
+         var guideTextBox = document.getElementById("guide");
+         // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+         if(data.autoRoadAddress) {
+             var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+             guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+             guideTextBox.style.display = 'block';
+
+         } else if(data.autoJibunAddress) {
+             var expJibunAddr = data.autoJibunAddress;
+             guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+             guideTextBox.style.display = 'block';
+         } else {
+             guideTextBox.innerHTML = '';
+             guideTextBox.style.display = 'none';
+         }
+     }
+ }).open();
+}
+</script>
 </head>
 <body>
 <h2>마이페이지 폼</h2>
-<form name="frmJoin" action="mypage_proc.mem" method="post">
+<form name="frmJoin" id="frmJoin" action="mypage_proc.mem" method="post" onsubmit="return chkInfo(this);">
 <input type="hidden" name="id" value="<%=loginMember.getMl_id() %>" />
 <table cellpadding="5">
 	<tr>
@@ -45,11 +97,18 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 	</tr>
 	<tr>
 		<th>비밀번호</th>
-		<td><input type="password" name="pwd" value="" /></td>
+		<td>
+			<input type="password" name="pwd" value="" id="pwd1" onchange="testPwd1();" /><br/>
+			<span id="chkPwd"></span>
+		</td>
 	</tr>
 	<tr>
 		<th>비밀번호 확인</th>
-		<td><input type="password" name="pwd2" value="" /></td>
+		<td>
+			<input type="password" name="pwd2" value="" id="pwd2" onchange="testPwd2();"/><br/>
+			<span id="pwdMsg"></span>
+		</td>
+
 	</tr>
 	<tr>
 		<th>전화번호</th>
@@ -60,8 +119,8 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 				<option value="016" <%if (p1.equals("016")) { %>selected="selected"<%} %>>016</option>
 				<option value="019" <%if (p1.equals("019")) { %>selected="selected"<%} %>>019</option>
 			</select> -
-			<input type="text" name="p2" size="4" maxlength="4" value="<%=p2%>"/> -
-			<input type="text" name="p3" size="4" maxlength="4" value="<%=p3%>" />
+			<input type="text" name="p2" size="4" maxlength="4" value="<%=p2%>" onkeyup="onlyNumber(this);"/> -
+			<input type="text" name="p3" size="4" maxlength="4" value="<%=p3%>" onkeyup="onlyNumber(this);"/>
 		</td>
 	</tr>
 	<tr>
@@ -80,7 +139,7 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 	</tr>
 	<tr>
 		<th>생년월일</th>
-		<td><input type="text" name="birth" value="<%=loginMember.getMl_birth()%>" />(yyyymmdd)</td>
+		<td><input type="text" name="birth" value="<%=loginMember.getMl_birth()%>" onkeyup="onlyNumber(this);" />(yyyymmdd)</td>
 	</tr>
 	<tr>
 		<th>성별</th>
@@ -95,11 +154,14 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 	<tr>
 		<th>주소1</th>
 		<td>
-			<input type="hidden" name="idxB" value="<%=memberAddrInfoFirst.getMa_idx() %>" />
-			<input type="radio" name="basicAddr" value="first" />&nbsp;기본배송지<br />
-			<input type="text" name="firstZip" value="<%=memberAddrInfoFirst.getMa_zip() %>" />&nbsp;우편번호<br />
-			<input type="text" name="firstAddr1" value="<%=memberAddrInfoFirst.getMa_addr1() %>" />&nbsp;기본주소<br />
-			<input type="text" name="firstAddr2" value="<%=memberAddrInfoFirst.getMa_addr2() %>" />&nbsp;상세주소
+			<input type="hidden" name="idxB" id="idxB" value="<%=memberAddrInfoFirst.getMa_idx() %>" />
+			<input type="hidden" name="firstAddrChkStatus" id="firstAddrChkStatus" value=""/>
+			<input type="radio" name="basicAddr" value="first" <% if(memberAddrInfoFirst.getMa_basic().equals("y")) { %>checked="checked"<%} %> />&nbsp;기본배송지<br />
+			<input type="text" name="firstZip"  value="<%=memberAddrInfoFirst.getMa_zip() %>" id="postcode1"placeholder="우편번호" readonly="readonly" />
+			<input type="button" onclick="execDaumPostcode('1')" value="우편번호 찾기" /><br />
+			<input type="text" name="firstAddr1" value="<%=memberAddrInfoFirst.getMa_addr1() %>"  id="roadAddress1" placeholder="도로명주소" readonly="readonly"/><br />
+			<span id="guide" style="color:#999;display:none;font-size:5px;"></span>
+			<input type="text" name="firstAddr2" value="<%=memberAddrInfoFirst.getMa_addr2() %>" id="detailAddress1" placeholder="상세주소" />
 		</td>
 	</tr>
 
@@ -109,10 +171,18 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 <tr>
 	<th>주소1</th>
 		<td>
-			<input type="radio" name="basicAddr" value="first"  />&nbsp;기본배송지<br />
-			<input type="text" name="firstZip" value="" />&nbsp;우편번호<br />
-			<input type="text" name="firstAddr1" value="" />&nbsp;기본주소<br />
-			<input type="text" name="firstAddr2" value="" />&nbsp;상세주소
+			<input type="hidden" name="idxB" id="idxB" value="" />
+			<input type="hidden" name="firstAddrChkStatus" id="firstAddrChkStatus" value=""/>
+			<% if(memberAddrInfoFirst == null && memberAddrInfoSecond == null) {%>
+			<input type="radio" name="basicAddr" value="first" checked="checked" />&nbsp;기본배송지<br />
+			<% } else { %>
+			<input type="radio" name="basicAddr" value="first" />&nbsp;기본배송지<br />
+			<% } %>
+			<input type="text" name="firstZip"  id="postcode1" class="firstAddr"  placeholder="우편번호" />
+			<input type="button" onclick="execDaumPostcode('1')" value="우편번호 찾기" /><br />
+			<input type="text" name="firstAddr1" id="roadAddress1" class="firstAddr"  placeholder="도로명주소" /><br />
+			<span id="guide" style="color:#999;display:none;font-size:5px;"></span>
+			<input type="text" name="firstAddr2" id="detailAddress1" class="firstAddr"  placeholder="상세주소" />
 		</td>
 	</tr>
 <%	}	%>
@@ -123,10 +193,13 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 		<th>주소2</th>
 		<td>
 			<input type="hidden" name="idxS" value="<%=memberAddrInfoSecond.getMa_idx() %>" />
-			<input type="radio" name="basicAddr" value="second"  />&nbsp;기본배송지<br />
-			<input type="text" name="secondZip" value="<%=memberAddrInfoSecond.getMa_zip() %>" />&nbsp;우편번호<br />
-			<input type="text" name="secondAddr1" value="<%=memberAddrInfoSecond.getMa_addr1() %>" />&nbsp;기본주소<br />
-			<input type="text" name="secondAddr2" value="<%=memberAddrInfoSecond.getMa_addr2() %>" />&nbsp;상세주소
+			<input type="hidden" name="secondAddrChkStatus" id="secondAddrChkStatus" value=""/>
+			<input type="radio" name="basicAddr" value="second" <% if(memberAddrInfoSecond.getMa_basic().equals("y")) { %>checked="checked"<%} %> />&nbsp;기본배송지<br />
+			<input type="text" name="secondZip"  value="<%=memberAddrInfoSecond.getMa_zip() %>" id="postcode2" class="secondAddr"  placeholder="우편번호" />
+			<input type="button" onclick="execDaumPostcode('2')" value="우편번호 찾기" /><br />
+			<input type="text" name="secondAddr1" value="<%=memberAddrInfoSecond.getMa_addr1() %>"  id="roadAddress2" class="secondAddr"  placeholder="도로명주소" /><br />
+			<span id="guide" style="color:#999;display:none;font-size:5px;"></span>
+			<input type="text" name="secondAddr2" value="<%=memberAddrInfoSecond.getMa_addr2() %>" id="detailAddress2" class="secondAddr"  placeholder="상세주소" />
 		</td>
 	</tr>
 
@@ -136,17 +209,21 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 <tr>
 	<th>주소2</th>
 		<td>
-			<input type="radio" name="basicAddr" value="second"  />&nbsp;기본배송지<br />
-			<input type="text" name="secondZip" value="" />&nbsp;우편번호<br />
-			<input type="text" name="secondAddr1" value="" />&nbsp;기본주소<br />
-			<input type="text" name="secondAddr2" value="" />&nbsp;상세주소
+			<input type="hidden" name="idxS" value="" />
+			<input type="hidden" name="secondAddrChkStatus" id="secondAddrChkStatus" value=""/>
+			<input type="radio" name="basicAddr" value="second" />&nbsp;기본배송지<br />
+			<input type="text" name="secondZip"  id="postcode2" class="secondAddr"  placeholder="우편번호" />
+			<input type="button" onclick="execDaumPostcode('2')" value="우편번호 찾기" /><br />
+			<input type="text" name="secondAddr1" id="roadAddress2" class="secondAddr"  placeholder="도로명주소"><br />
+			<span id="guide" style="color:#999;display:none;font-size:5px;"></span>
+			<input type="text" name="secondAddr2" id="detailAddress2" class="secondAddr"  placeholder="상세주소" />
 		</td>
 	</tr>
 <%	}	%>
 	<tr>
 		<th colspan="2">
 			<input type="submit" value="수정 하기" />
-			<input type="reset" value="다시 작성" />
+			<input type="button" value="취소" onclick="location.href='history.back()';" />
 		</th>
 	</tr>
 </table>
