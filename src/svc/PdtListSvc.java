@@ -2,9 +2,6 @@ package svc;
 
 import static db.JdbcUtil.*;
 import java.util.*;
-
-import admin.dao.PdtDao;
-
 import java.sql.*;
 import dao.*;
 import vo.*;;
@@ -22,13 +19,13 @@ public class PdtListSvc {
 		return rcnt;
 	}
 
-	public ArrayList<PdtInfo> getPdtList(String where,int cpage, int psize) {
+	public ArrayList<PdtInfo> getPdtList(String where, String orderby, int cpage, int psize) {
 		ArrayList<PdtInfo> pdtList = new ArrayList<PdtInfo>();
 		// 상품 목록을 저장할 ArrayList객체로 PdtInfo형 인스턴스만 저장함
 		Connection conn = getConnection();
 		PdtDao pdtDao = PdtDao.getInstance();
 		pdtDao.setConnection(conn);
-		pdtList = pdtDao.getPdtList(where, cpage, psize);
+		pdtList = pdtDao.getPdtList(where, orderby, cpage, psize);
 		close(conn);
 
 		return pdtList;

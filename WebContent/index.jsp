@@ -9,7 +9,7 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="style.css" />
+
 <title>Insert title here</title>
 
 </head>
