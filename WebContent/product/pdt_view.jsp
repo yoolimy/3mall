@@ -62,7 +62,7 @@ top:297px; left:430px; border:2px dotted;
 
 function showImg(imgName) {
 	var bigImg = document.getElementById("bigImg");
-	bigImg.src = "/3mall/product/pdt_img/" + imgName;
+	bigImg.src = "./product/pdt_img/" + imgName;
 }
 
 function changeDate(cal) {
