@@ -124,15 +124,16 @@ function allBuy() {
 </script>
 </head>
 <body>
-<h2>장바구니 화면</h2>
+<%@ include file="../header.jsp" %>
+<div class="main">
 <form name="frmCart" action="order_form.ord" method="post">
 <input type="hidden" name="chk" value="" />
 <input type="hidden" name="idxs" value="" />
 <input type="hidden" name="kind" value="cart" />
-<table width="700" cellpadding="5" cellspacing="0" id="cartTable">
+<table width="700" cellpadding="5" cellspacing="0" id="cartTable" align="center">
 <tr>
 <th width="5%"><input type="checkbox" checked="checked" name="all" onclick="chkAll(this);" /></th>
-<th width="*">상품</th><th width="25%">대여일</th><th width="10%">가격</th><th width="10%">삭제</th>
+<th width="30%">상품</th><th width="*%">대여일</th><th width="13%">가격</th><th width="10%">삭제</th>
 </tr>
 <%
 if (cartList != null && cartList.size() > 0) {	// 장바구니에 데이터가 들어 있으면
@@ -158,7 +159,7 @@ if (cartList != null && cartList.size() > 0) {	// 장바구니에 데이터가 �
 	}
 %>
 </table>
-<table width="700" cellpadding="15" cellspacing="0">
+<table width="700" cellpadding="15" cellspacing="0" align="center">
 <tr>
 <td width="*">
 	<input type="button" value="선택한 상품 구매" onclick="chkBuy();" />
@@ -182,5 +183,6 @@ if (cartList != null && cartList.size() > 0) {	// 장바구니에 데이터가 �
 %>
 </table>
 </form>
+</div>
 </body>
 </html>

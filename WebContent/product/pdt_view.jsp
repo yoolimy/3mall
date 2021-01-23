@@ -52,16 +52,17 @@ int price = pdtInfo.getPl_price() * Integer.parseInt(rentDate);
 <style>
 #thImg img { margin:10px; }
 #cal { 
-width:350px; height:320px; background:#ecedeb; overflow:auto; position:absolute; 
+width:380px; height:350px; background:#ecedeb; overflow:auto; position:absolute; 
 top:297px; left:430px; border:2px dotted;
 }
 #buttons { border:0px; }
 
 </style>
 <script>
+
 function showImg(imgName) {
 	var bigImg = document.getElementById("bigImg");
-	bigImg.src = "/3mall/product/pdt_img/" + imgName;
+	bigImg.src = "./product/pdt_img/" + imgName;
 }
 
 function changeDate(cal) {
@@ -131,8 +132,9 @@ if (loginMember == null) {	// 로그인을 하지 않은 상태일 경우
 </script>
 </head>
 <body>
-<h2>상품 상세보기 화면</h2>
-<table width="800" cellpadding="5">
+<%@ include file="../header.jsp" %>
+<div class="main">
+<table width="800" cellpadding="5" align="center">
 <tr>
 <td width="40%" align="center" valign="middle">
 	<table width="100%">
@@ -197,7 +199,7 @@ style="display:block"
 <%} else { %>
 	style="display:none"
 <%} %>
->
+align="center">
 <form name="frmSchDate" action="pdt_view.pdt<%=args %>&id=<%=id %>&pop=y" method="post">
 <a href="javascript:hideSchedule('cal')">
 <img src='images/close.png' width='7%' align="right"></a><br />
@@ -294,6 +296,7 @@ for (int i = 1, n = startWeekDay ; i <= endDay ; i++, n++ ){
 }
 %>
 </table>
+</div>
 </div>
 </body>
 </html>
