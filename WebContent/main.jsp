@@ -200,11 +200,13 @@ $(document).ready(function() {
     <%
     if (loginMember == null) {
     %>
-    <a href="login_form.jsp" style="text-decoration:none; font-size:0.8em;">로그인</a>
+    <a href="login_form.jsp"  style="text-decoration:none; font-size:0.8em;">로그인</a>
     <%
     } else { %>
     <%=loginMember.getMl_id() %>(<%=loginMember.getMl_name() %>)님 환영합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="logout"  style="text-decoration:none; font-size:0.8em;" >로그아웃</a>
+	<a href="mypage_view.mem" style="text-decoration:none; font-size:0.8em;">마이페이지</a>
+	<a href="cart_list.ord" style="text-decoration:none; font-size:0.8em;">장바구니</a>
     <%
     }
     %>

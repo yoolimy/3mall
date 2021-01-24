@@ -7,11 +7,11 @@ import dao.*;
 import vo.*;
 
 public class CartDelSvc {
-	public int cartDelete(String idx, String buyer) {
+	public int cartDelete(String idx, String mlId) {
 		Connection conn = getConnection();
 		OrdDao ordDao = OrdDao.getInstance();
 		ordDao.setConnection(conn);
-		int result = ordDao.cartDelete(idx, buyer);
+		int result = ordDao.cartDelete(idx, mlId);
 		if (result > 0) {
 			commit(conn);
 		} else {

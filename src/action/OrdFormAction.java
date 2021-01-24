@@ -20,6 +20,15 @@ public class OrdFormAction implements Action {
 		HttpSession session = request.getSession();
 		
 		MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
+		if (loginMember == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 사용할 수 있습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
 		if (kind.equals("cart")) {	// 장바구니를 통한 구매일 경우
 			String[] arrIdxs = idxs.split(",");
 			for (int i = 0 ; i < arrIdxs.length ; i++) {
@@ -31,10 +40,18 @@ public class OrdFormAction implements Action {
 		} else {	// 바로 구매일 경우
 			
 		}
+		
+		MypageViewSvc mypageViewSvc = new MypageViewSvc();
+		MemberAddrInfo memberAddrInfoFirst = mypageViewSvc.getMemberAddrInfo(loginMember.getMl_id(), "y");
+		MemberAddrInfo memberAddrInfoSecond = mypageViewSvc.getMemberAddrInfo(loginMember.getMl_id(), "n");		
+
+		
 		OrdFormSvc ordFormSvc = new OrdFormSvc();
 		pdtList = ordFormSvc.getOrdFrmPdtList(kind, where);
 		request.setAttribute("pdtList", pdtList);
-
+		request.setAttribute("memberAddrInfoFirst", memberAddrInfoFirst);
+		request.setAttribute("memberAddrInfoSecond", memberAddrInfoSecond);
+		
 		ActionForward forward = new ActionForward();
 		forward.setPath("/order/order_form.jsp");	// 이동할 URL 지정
 		return forward;

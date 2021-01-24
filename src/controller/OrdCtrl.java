@@ -32,11 +32,11 @@ public class OrdCtrl extends HttpServlet {
 			case "/cart_list.ord" :			// 장바구니 화면
 				action = new CartListAction();		break;
 			case "/cart_del.ord" :			// 장바구니 삭제 기능
-//				action = new CartDelAction();		break;
+				action = new CartDelAction();		break;
 			case "/order_form.ord" :		// 구매창으로 이동시킴
 				action = new OrdFormAction();		break;
-//			case "/order_proc.ord" :		// 구매처리 기능
-//				action = new OrdProcAction();		break;
+			case "/order_proc.ord" :		// 구매처리 기능
+				action = new OrdProcAction();		break;
 //			case "/order_success.ord" :		// 구매완료 화면
 //				action = new OrdSuccessAction();	break;
 		}

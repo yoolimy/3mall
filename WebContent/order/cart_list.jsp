@@ -78,7 +78,7 @@ function notCool(idx) {
 	if (isConfirm) {
 		$.ajax({
 			type : "POST", 
-			url : "/mvcMall/cart_del.ord", 
+			url : "./cart_del.ord", 
 			data : { "idx" : idx }, 
 			success : function(chkRst) {
 				if(chkRst == 0)		alert("선택한 상품 삭제에 실패했습니다.\n다시 시도해 주십시오.");
@@ -121,6 +121,7 @@ function allBuy() {
 	chkAll(all);		// 전체 선택용 체크박스를 이용하여 전체를 선택하게 만듬
 	chkBuy();			// 선택된 상품을 구매하는 함수 호출
 }
+
 </script>
 </head>
 <body>

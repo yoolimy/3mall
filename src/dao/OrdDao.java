@@ -25,7 +25,7 @@ public class OrdDao {
 	}
 
 	public ArrayList<CartInfo> getCartList(String mlId) {
-	// 장바구니에서 보여줄 특정 사용자(회원, 비회원)의 장바구니 목록을 리턴하는 메소드
+	// 장바구니에서 보여줄 특정 사용자의 장바구니 목록을 리턴하는 메소드
 		ArrayList<CartInfo> cartList = new ArrayList<CartInfo>();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -95,7 +95,7 @@ public class OrdDao {
 	}
 
 
-	public int cartDelete(String idx, String buyer) {
+	public int cartDelete(String idx, String mlId) {
 	// 사용자가 선택한 상품(들)을 장바구니에서 삭제하는 메소드
 		int result = 0;
 		Statement stmt = null;
@@ -107,7 +107,7 @@ public class OrdDao {
 				where += " or cl_idx = " + arrIdx[i];
 			}
 			where = " and (" + where.substring(4) + ")";
-			String sql = "delete from t_cart_list where cl_buyer = '" + buyer + 
+			String sql = "delete from t_cart_list where ml_id = '" + mlId + 
 				"' " + where;
 			stmt = conn.createStatement();
 			result = stmt.executeUpdate(sql);
@@ -119,4 +119,48 @@ public class OrdDao {
 
 		return result;
 	}
+	public ArrayList<CartInfo> getOrdFrmPdtList(String kind, String where) {
+		// 장바구니나 바로구매를 통해 결제하려는 사용자에게 보여줄 상품목록을 리턴하는 메소드
+			ArrayList<CartInfo> pdtList = new ArrayList<CartInfo>();
+			Statement stmt = null;
+			ResultSet rs = null;
+
+			try {
+				String sql = "";
+				if (kind.equals("cart")) {	// 장바구니를 통한 구매일 경우
+					sql = "select c.cl_idx, p.pl_name, p.pl_mainimg, c.cl_sdate, c.cl_rdate," + 
+					" c.cl_edate, p.pl_price, p.pl_id from t_cart_list c, t_product_list p " + 
+					" where c.pl_id = p.pl_id and p.pl_view = 'y' " + where + 
+					" order by p.pl_id";
+				
+				} else {	// 바로 구매를 통한 구매일 경우
+					
+				}
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				while (rs.next()) {
+					CartInfo cart = new CartInfo();
+					if (kind.equals("cart")) {
+						cart.setCl_idx(rs.getInt("cl_idx"));
+						cart.setCl_sdate(rs.getString("cl_sdate"));
+						cart.setCl_edate(rs.getString("cl_edate"));
+						cart.setCl_rdate(rs.getString("cl_rdate"));
+					} else {
+						
+					}
+
+					cart.setPl_id(rs.getString("pl_id"));
+					cart.setPl_name(rs.getString("pl_name"));
+					cart.setPl_mainimg(rs.getString("pl_mainimg"));
+					cart.setPl_price(rs.getInt("pl_price"));
+					pdtList.add(cart);
+				}
+			} catch(Exception e) {
+				System.out.println("getOrdFrmPdtList() 오류");		e.printStackTrace();
+			} finally {
+				close(rs);	close(stmt);
+			}
+
+			return pdtList;
+		}
 }
