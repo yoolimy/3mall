@@ -93,8 +93,8 @@ $(document).ready(function() {
          <li><a href="pdt_list.pdt?bcata=2"><b>남성한복</b></a></li>
          <li><a href="pdt_list.pdt?bcata=3"><b>장신구</b></a></li>
          <li><a href="review_list.review"><b>리뷰 게시판</b></a></li>
-         <li><a href="member_list.amem"><b>1:1 문의</b></a></li>
-         <li><a href="member_list.amem"><b>대여 시스템</b></a></li>
+         <li><a href="#"><b>1:1 문의</b></a></li>
+         <li><a href="rantSystem.jsp"><b>대여 시스템</b></a></li>
      </ul>
     </nav>
 </header>

@@ -43,7 +43,7 @@ public class LoginCtrl extends HttpServlet {
 			String url = (String)session.getAttribute("url");
 			// 로그인 후 특정 페이지로 이동하기 위한 주소를 받아옴
 			session.removeAttribute("url");		// 이동 후에는 url 세션 속성을 삭제
-			if (url == null) 	url = "index.jsp";
+			if (url == null) 	url = "main.jsp";
 			response.sendRedirect(url);
 		} else {	// 로그인 실패시
 			response.setContentType("text/html;charset=utf-8");
