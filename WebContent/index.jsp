@@ -45,6 +45,7 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <a href="pdt_list.pdt?bcata=2">남성한복</a>
                 <a href="pdt_list.pdt?bcata=3">장신구</a>
                 <a href="review_list.review">리뷰 게시판</a>
+                <a href="rantSystem.jsp">대여 시스템</a>
                 <hr />
                 <a href="main.jsp">메인화면</a>
                 <hr />
