@@ -4,8 +4,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.*;
 import java.util.*;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import svc.*;
 import vo.*;
 
@@ -16,9 +14,13 @@ public class MypageProcAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-		
+
+		System.out.println("firstAddrChkStatus :: " + request.getParameter("firstAddrChkStatus"));
+		System.out.println("secondAddrChkStatus :: " + request.getParameter("secondAddrChkStatus"));
 		String idxB = request.getParameter("idxB");
 		String idxS = request.getParameter("idxS");
+		String firstAddrChkStatus = request.getParameter("firstAddrChkStatus");
+		String secondAddrChkStatus = request.getParameter("secondAddrChkStatus");
 		String id = request.getParameter("id");
 		String name = request.getParameter("name").trim();
 		String pwd = request.getParameter("pwd").trim();
@@ -37,10 +39,7 @@ public class MypageProcAction implements Action {
 		String secondAddr1 = request.getParameter("secondAddr1");
 		String secondAddr2 = request.getParameter("secondAddr2");
 		
-		System.out.println(request.getParameter("idxB"));
-		System.out.println(request.getParameter("idxS"));
 		MypageProcSvc mypageProcSvc = new MypageProcSvc();
-		
 		
 		MemberInfo mypageInfo = new MemberInfo();
 		mypageInfo.setMl_id(id);
@@ -65,30 +64,41 @@ public class MypageProcAction implements Action {
 		
 		boolean addrFirstInsertResult = true;
 		boolean addrFirstUpdateResult = true;
+		boolean addrFirstDeleteResult = true;
 		
 		memberAddrInfoFirst.setMa_zip(firstZip);
 		memberAddrInfoFirst.setMa_addr1(firstAddr1);
 		memberAddrInfoFirst.setMa_addr2(firstAddr2);
-		if(idxB == null) {
+		if	(firstAddrChkStatus.equals("insert")) {
 			addrFirstInsertResult = mypageProcSvc.getMypageAddrInsert(id, memberAddrInfoFirst);
-		} else {
+		} else if (firstAddrChkStatus.equals("update")) {
 			memberAddrInfoFirst.setMa_idx(Integer.parseInt(idxB));
 			addrFirstUpdateResult = mypageProcSvc.getMypageAddrUpdate(memberAddrInfoFirst);
-		}
+		} else if (firstAddrChkStatus.equals("delete")) {
+			memberAddrInfoFirst.setMa_idx(Integer.parseInt(idxB));
+			addrFirstDeleteResult = mypageProcSvc.getMypageAddrDelete(id, memberAddrInfoFirst);
+		} 
 
 		
 		boolean addrSecondInsertResult = true;
 		boolean addrSecondUpdateResult = true;
+		boolean addrSecondDeleteResult = true;
 		
-		memberAddrInfoFirst.setMa_zip(secondZip);
-		memberAddrInfoFirst.setMa_addr1(secondAddr1);
-		memberAddrInfoFirst.setMa_addr2(secondAddr2);
-		if(idxS == null) {
+		System.out.println(memberAddrInfoFirst.getMa_basic());
+		System.out.println(memberAddrInfoSecond.getMa_basic());
+		
+		memberAddrInfoSecond.setMa_zip(secondZip);
+		memberAddrInfoSecond.setMa_addr1(secondAddr1);
+		memberAddrInfoSecond.setMa_addr2(secondAddr2);
+		if	(secondAddrChkStatus.equals("insert")) {
 			addrSecondInsertResult = mypageProcSvc.getMypageAddrInsert(id, memberAddrInfoSecond);
-		} else {
-			memberAddrInfoSecond.setMa_idx(Integer.parseInt(idxB));
+		} else if (secondAddrChkStatus.equals("update")) {
+			memberAddrInfoSecond.setMa_idx(Integer.parseInt(idxS));
 			addrSecondUpdateResult = mypageProcSvc.getMypageAddrUpdate(memberAddrInfoSecond);
-		}
+		} else if (secondAddrChkStatus.equals("delete")) {
+			memberAddrInfoSecond.setMa_idx(Integer.parseInt(idxS));
+			addrSecondDeleteResult = mypageProcSvc.getMypageAddrDelete(id, memberAddrInfoSecond);
+		} 
 		
 		boolean isSuccess = mypageProcSvc.getMypageUpdate(mypageInfo);
 
@@ -99,23 +109,37 @@ public class MypageProcAction implements Action {
 			out.println("</script>");
 			out.close();
 		}
-		if (!addrSecondInsertResult) {	// 회원주소1등록에 실패했으면
+		if (!addrSecondInsertResult) {	// 회원주소2등록에 실패했으면
 			out.println("<script>");
-			out.println("alert('회원주소1 등록이 실패했습니다.');");
+			out.println("alert('회원주소2 등록이 실패했습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 		}
-		if (!addrFirstUpdateResult) {	// 회원주소1등록에 실패했으면
+		if (!addrFirstUpdateResult) {	// 회원주소1 수정에 실패했으면
 			out.println("<script>");
-			out.println("alert('회원주소1 등록이 실패했습니다.');");
+			out.println("alert('회원주소1 수정이 실패했습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 		}
-		if (!addrSecondUpdateResult) {	// 회원주소1등록에 실패했으면
+		if (!addrFirstDeleteResult) {	// 회원주소1 삭제에 실패했으면
 			out.println("<script>");
-			out.println("alert('회원주소1 등록이 실패했습니다.');");
+			out.println("alert('회원주소1 삭제에 실패했습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
+		if (!addrSecondUpdateResult) {	// 회원주소2 수정에 실패했으면
+			out.println("<script>");
+			out.println("alert('회원주소2 수정이 실패했습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		} 
+		if (!addrSecondDeleteResult) {	// 회원주소2 삭제가 실패했으면
+			out.println("<script>");
+			out.println("alert('회원주소2 삭제에 실패했습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();

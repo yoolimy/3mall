@@ -3,12 +3,13 @@
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>
 <%
+MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
 ArrayList<PdtInfo> pdtList = (ArrayList<PdtInfo>)request.getAttribute("pdtList");
 ArrayList<CataBigInfo> cataBigList = (ArrayList<CataBigInfo>)request.getAttribute("cataBigList");
 ArrayList<CataSmallInfo> cataSmallList = (ArrayList<CataSmallInfo>)request.getAttribute("cataSmallList");
 PdtPageInfo pageInfo = (PdtPageInfo)request.getAttribute("pageInfo");
 
-String keyword, bcata, scata, brand, sprice, eprice, ord;
+String keyword, bcata, scata, ord;
 
 bcata =		pageInfo.getBcata();	// 대분류
 scata =		pageInfo.getScata();	// 소분류
@@ -35,12 +36,23 @@ args = "&cpage=" + cpage + schArgs;
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
+.pdtBox3 a:link, .pdtBox4 a:link {
+  text-decoration:none; font-weight:bold; color:#543900;
+ }
+.pdtBox3 a:visited, .pdtBox4 a:visited {
+  text-decoration:none; font-weight:bold; color:#543900;
+ }
+.pdtBox3 a:hover, .pdtBox4 a:hover {
+  text-decoration:underline; font-weight:bold; color:#C07F5A;
+ }
+div { border-style:none; }
 td { font-size:11; }
 .pr { width:50px; }
-.pdtBox3 { width:266px; height:250px; border:1px solid black; }
-.pdtBox4 { width:195px; height:200px; border:1px solid black; }
+.pdtBox3 { width:200px; height:400px; }
+.pdtBox4 { width:180px; height:330px; }
 </style>
 <script>
+		
 function cngPsize(num) {
 	document.frmSch.psize.value = num;
 	document.frmSch.submit();
@@ -49,17 +61,22 @@ function cngPsize(num) {
 function ordSubmit(obj) {
 	obj.submit();
 }
+
 </script>
 </head>
 <body>
-<h2>상품 목록 화면</h2>
+<%@ include file="../header.jsp" %>
+<div class="main">
 <form name="frmSch" action="" method="get">
-<table width="800" cellpadding="5">
+<input type="hidden" name="bcata" value="<%=bcata %>">
+<input type="hidden" name="scata" value="<%=scata %>">
+<input type="hidden" name="psize" value="<%=psize %>">
+<table width="800" cellpadding="5" align="center">
 <tr>
 <td align="right">
-	<img src="/3mall/images/v6-1.png" width="20px" onclick="cngPsize('6')" align="absmiddle"/>&nbsp;
-	<img src="/3mall/images/v12-1.png" width="20px" onclick="cngPsize('12')" align="absmiddle"/>
-	<input type="hidden" name="psize" value="6">
+	<img src="images/v6-1.png" width="20px" onclick="cngPsize('6')" align="absmiddle"/>&nbsp;
+	<img src="images/v12-1.png" width="20px" onclick="cngPsize('12')" align="absmiddle"/>
+	
 &nbsp;&nbsp;
 	<select name="ord" onchange="ordSubmit(this.form)">
 		<option value="" <% if (ord.equals("")) { %>selected="selected"<% } %>>상품 정렬</option>
@@ -74,7 +91,7 @@ function ordSubmit(obj) {
 </table>
 </form>
 <br /><br />
-<table width="800" cellpadding="5">
+<table width="1000" cellpadding="5" align="center">
 <%
 int max = 3;	// 한 행에서 보여줄 상품의 최대 개수
 if (psize == 12) max = 4;
@@ -89,8 +106,13 @@ if (pdtList != null && rcnt > 0) {	// 검색결과가 있으면
 %>
 <td>
 	<div class="pdtBox<%=max%>">
+<<<<<<< HEAD
 		<%=lnk %><img src="./product/pdt_img/<%=pdtList.get(i).getPl_mainimg() %>" width="<%=max == 3 ? 250 : 180 %>" height="<%=max == 3 ? 180 : 150 %>" /></a><br />
 		<%=lnk + pdtList.get(i).getPl_name() %></a><%=soldout %><br />판매가 : <%=price %> 원 (1일)
+=======
+		<%=lnk %><img src="product/pdt_img/<%=pdtList.get(i).getPl_mainimg() %>" width="<%=max == 3 ? 250 : 200 %>" height="<%=max == 3 ? 330 : 270 %>" /></a><br />
+		<%=lnk + pdtList.get(i).getPl_name() %></a><%=soldout %><br /><%=price %> 원 (1일)
+>>>>>>> bbd023ae992445af69cdde07f59ef6259094a3fa
 	</div>
 </td>
 <%
@@ -102,10 +124,9 @@ out.println("<tr><td align='center'>검색결과가 없습니다.</td></tr>");
 %>
 </table>
 <br />
-<table width="800" cellpadding="5">
-<tr><td align="center">
+<table width="800" cellpadding="5" align="center">
 <tr>
-<td width="*">
+<td width="*" align="center">
 <%
 if (rcnt > 0) {	// 검색결과 상품들이 있을 경우에만 페이징을 함
 	if (cpage == 1) {
@@ -138,5 +159,6 @@ if (rcnt > 0) {	// 검색결과 상품들이 있을 경우에만 페이징을 �
 %>
 </tr>
 </table>
+</div>
 </body>
 </html>

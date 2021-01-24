@@ -108,7 +108,7 @@ public class PdtDao {
 		return rcnt;
 	}
 
-	public ArrayList<PdtInfo> getPdtList(String where, int cpage, int psize) {
+	public ArrayList<PdtInfo> getPdtList(String where, String orderby, int cpage, int psize) {
 	// 검색조건과 정렬조건을 받아와 조건에 맞는 상품들을 정렬하여 그 목록을 ArrayList<PdtInfo>형으로 리턴하는 메소드
 		ArrayList<PdtInfo> pdtList = new ArrayList<PdtInfo>();
 		// 상품 목록을 저장할 ArrayList객체로 PdtInfo형 인스턴스만 저장함
@@ -121,7 +121,7 @@ public class PdtDao {
 		try {
 			sql = "select a.*, b.cb_name, c.cs_name from t_product_list a, t_cata_big b, " + 
 				" t_cata_small c where a.cs_idx = c.cs_idx and b.cb_idx = c.cb_idx " + 
-				where + " limit " + snum + ", " + psize;
+				where + orderby + " limit " + snum + ", " + psize;
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {

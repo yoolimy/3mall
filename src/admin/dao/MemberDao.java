@@ -59,7 +59,6 @@ public class MemberDao {
 		
 		try {
 			sql = "select * from t_member_list " + where + orderby + " limit " + snum + ", " + psize;
-			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -95,7 +94,6 @@ public class MemberDao {
 		ResultSet rs = null;
 		String sql = null;
 		try {
-//			int saleCnt = 0;
 			stmt = conn.createStatement();
 			sql = "select * from t_member_list where ml_id = '" + id + "' ";
 			rs = stmt.executeQuery(sql);

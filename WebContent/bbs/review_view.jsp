@@ -13,7 +13,7 @@ if (article == null) {
 
 String uid = null;
 MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
-if (loginMember != null) 	uid = loginMember.getMlid();
+if (loginMember != null) 	uid = loginMember.getMl_id();
 // 현재 로그인한 상태이면 로그인 아이디를 uid에 저장
 
 int idx = Integer.parseInt(request.getParameter("idx"));
@@ -72,11 +72,13 @@ if (isPms) {	// 수정 및 삭제 권한이 있거나 비회원 글이면
 	// 회원이 등록한 글일 경우(현재 글이 로그인한 회원의 글이면)
 %>
 <script>
+
 function notCool(idx) {
 	if (confirm("정말 삭제하시겠습니까?")) {
 		location.href="brd_proc.review?wtype=del&idx="  + idx + "&ismember=<%=article.getRl_ismember()%>";
 	}
 }
+
 </script>
 <%
 	}

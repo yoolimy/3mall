@@ -1,0 +1,43 @@
+-- 회원 주소2
+
+
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('lee12', '06009', '서울시 강남구 압구정로 417 (압구정동)', '8층', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('skchoi', '04521', '서울특별시 중구 남대문로 125', '(다동) 1801호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('palpadac', '07505', '서울시 강서구 하늘길 260', '에스케이뷰파크 110동 2201호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('hyuan-li', '04563', '서울특별시 중구 장충단로 275 (을지로6가)', '두산타워빌딩 1206호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('hee.yang', '22502', '인천광역시 동구 인중로 489 ', '나동 1105호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('cheangengmi', '51711', '경상남도 창원시 성산구 두산볼보로 22 (귀곡동)  ', '나동 1106호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('cha18', '52509', '경남 사천시 축동면 구해창길 20-7번지', '3306호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('hsucom123', '52529', '경상남도 사천시 사남면 공단1로 78', '다동 203호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('sohyunee', '04322', '서울특별시 용산구 한강대로71길 4 (갈월동)  ', '다동 206호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('sekjung', '04541', '서울특별시 중구 청계천로 86 (장교동, 한화빌딩)', '4층 무역센터', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('khy375', '04541', '서울 중구 청계천로 86 한화빌딩', '12층', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('bluesky', '04541', '서울시 중구 청계천로 86 한화빌딩', '19층', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('je0435', '04541', '서울특별시 중구 청계천로 86', '7층', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('young2357', '04541', '경남 창원시 성산구 창원대로', '1204호(성주동)', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('medine', '18463', '경기도 화성시 동탄면 영천로 174 (영천리 79-17)', '푸르지오 2차 104동 1102호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('lim0912', '16082', '경기도 의왕시 철도박물관로37', '바동 1002호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('castle', '16082', '경기도 의왕시 철도박물관로37', '기술연구소 16층', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('giwoo99', '13201', '경기도 성남시 중원구 사기막골로 105번길 27 (상대원동)', '동원빌딩 1004호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('ychilSim', '03058', '서울특별시 종로구 율곡로 75 (계동) ', '바동 1007호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('wesshim', '06621', '서울시 서초구 강남대로 369', '나라빌딩 LIG넥스원 13층', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('sunghun6547', '46002', '부산광역시 기장군 철마면 여락송정로 363', '1501호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('jungsu18', '51534', '경남 창원시 성산구 남면로 599 (외동)', '궁동아파트 1501호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('LKW6205', '04637', '서울 중구 후암로 98(남대문로 5가)', 'STX남산타워 2층', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('af4312', '51624', '경남 창원시 진해구 명제로 60 (원포동)', '401호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('bch56', '34186', '대전광역시 유성구', '유성우체국 사서함 35호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('byungcheon9876', '52851', '경상남도 진주시 동진로 420 (충무공동)', '국방기술품질원', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('hjlee0527', '13548', '서울시 구로구 고척로 49, 동부골든아파트 205동 501호', '은마아파트 701동 1201호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('kaien93', '65487', '서울시 동작구 만양로 26 노량진동', '건영아파트 106동 1708호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('segroup', '02841', '서울시 성북구 안암로 145', '고려대학교 자연계캠퍼스 미래융합기술관 615호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('kiyang79.kim', '17058', '경기도 용인시 처인구 명지로 116', '제5공학관 5351호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('wsj76309', '16500', '경기도 수원시 영통구 원천동 산5번지', '아주대학교 팔달관 210호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('jdl', '48250', '부산시 수영구 광일로 67번길 46', '국방기술품질원 함정센터', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('jsw225', '51474', '경남 창원시 성산구 창원대로 1137번길 9(삼정자동)', '국방기술품질원 기동화력센터', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('khj56', '52851', '경상남도 진주시 동진로 420(충무공동)', '국방기술품질원 항공센터', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('sangsang', '25233', '강원도 인제군 서화면 천도촌1길 100-21', '국방기술품질원 신뢰성시험센터', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('susu5438', '27383', '서울시 성북구 오패산로 3길 12 ', '푸르지오 1306호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('victorspark', '34027', '대전시 유성구 테크노9로 35 (탑립동 694)', '대전테크노파크 1층', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('jungdsc09', '51347', '경상남도 창원시 마산회원구 봉암북7길 21', '벽산아파트 222동 615호', 'n');
+insert into t_member_addr(ml_id, ma_zip, ma_addr1, ma_addr2, ma_basic) values ('myhama00', '39253', '경북 구미시 구미대로 350-27(신평동)', '구미시 종합비즈니스지원센터 802호', 'n');
+

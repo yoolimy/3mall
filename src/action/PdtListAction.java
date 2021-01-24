@@ -44,7 +44,7 @@ public class PdtListAction implements Action {
 		
 		rcnt = pdtListSvc.getPdtCount(where);	// 검색된 상품의 총 개수(페이지 개수를 구하기 위해 필요)
 
-		pdtList = pdtListSvc.getPdtList(where, cpage, psize);
+		pdtList = pdtListSvc.getPdtList(where, orderby, cpage, psize);
 		// 현 페이지에서 보여줄 검색된 상품목록
 		// 검색조건, 정렬조건, limit에서 사용할 값을 구하기 위해 현재페이지와 페이지크기를 인수로 가져감
 

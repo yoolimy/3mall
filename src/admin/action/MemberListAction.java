@@ -32,10 +32,10 @@ public class MemberListAction implements action.Action {
 		String where = "", orderby = "";
 		
 		if (keyword != null && !keyword.equals("")) {
-			where += " and ml_" + schtype + " like '%" + keyword + "%' ";
+			where += " where ml_" + schtype + " like '%" + keyword + "%' ";
 		} 
 		if (gender != null && !gender.equals("")) {
-			where += " and ml_gender = '" + gender + "' ";
+			where += " where ml_gender = '" + gender + "' ";
 		}
 		
 		// order by ¸¸µé±â

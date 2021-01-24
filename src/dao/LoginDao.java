@@ -1,6 +1,10 @@
 package dao;
 
 import static db.JdbcUtil.*;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+import java.io.*;
 import java.sql.*;
 import vo.*;
 
@@ -32,36 +36,47 @@ public class LoginDao {
 	// Connection객체를 여러 번 생성하는 것을 막기 위해 멤버로 만들어 사용
 		this.conn = conn;
 	}
-	public MemberInfo getLoginMember(String uid, String pwd) {
+
+	public MemberInfo getLoginMember(HttpServletResponse response, String uid, String pwd) throws ServletException, IOException {
 		MemberInfo loginMember = null;	// 리턴할 인스턴스 선언
 		Statement stmt = null;
 		ResultSet rs = null;
-
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
 		try {
 			stmt = conn.createStatement();
-			// 쿼리를 운반할 Statement생성
-			String sql = "select * from t_member_list " + 
-				" where ml_status = 'a' and ml_id = '" + uid + 
-				"' and ml_pwd = '" + pwd + "'";
-			rs = stmt.executeQuery(sql);
-			// 쿼리 실행 결과를 ResultSet에 담음
-			if (rs.next()) {	// 로그인 성공시
-				loginMember = new MemberInfo();
-				// 로그인한 회원정보를 저장할 loginMember인스턴스 생성
+			String sql = "select * from t_member_list where ml_status = 'a' and ml_id = '" + uid + "'";
+		      rs = stmt.executeQuery(sql);
+		      if (rs.next()) {   // 아이디가 존재하면
+		         if (pwd.equals(rs.getString("ml_pwd"))) {   // 로그인에 성공했으면
+		        	 loginMember = new MemberInfo();
+					// 로그인한 회원정보를 저장할 loginMember인스턴스 생성
+		        	loginMember.setMl_id(uid);
+					loginMember.setMl_pwd(pwd);
+					loginMember.setMl_name(rs.getString("ml_name"));
+					loginMember.setMl_gender(rs.getString("ml_gender"));
+					loginMember.setMl_birth(rs.getString("ml_birth"));
+					loginMember.setMl_phone(rs.getString("ml_phone"));
+					loginMember.setMl_email(rs.getString("ml_email"));
+					loginMember.setMl_date(rs.getString("ml_date"));
+					loginMember.setMl_last(rs.getString("ml_last"));
+					loginMember.setMl_status("a");
+					// MemberInfo클래스의 인스턴스 loginMember에 회원정보를 저장
+		         } else {   // 암호가 틀렸으면
+		            out.println("<script>");
+		            out.println("alert('비밀번호가 틀렸습니다.');");
+		            out.println("history.back();");
+		            out.println("</script>");
+		         }
+		      } else {   // 아이디가 틀렸으면
+		            out.println("<script>");
+		            out.println("alert('아이디가 틀렸습니다.');");
+		            out.println("history.back();");
+		            out.println("</script>");
+		      }
 
-				loginMember.setMl_id(uid);
-				loginMember.setMl_pwd(pwd);
-				loginMember.setMl_name(rs.getString("ml_name"));
-				loginMember.setMl_gender(rs.getString("ml_gender"));
-				loginMember.setMl_birth(rs.getString("ml_birth"));
-				loginMember.setMl_phone(rs.getString("ml_phone"));
-				loginMember.setMl_email(rs.getString("ml_email"));
-				loginMember.setMl_date(rs.getString("ml_date"));
-				loginMember.setMl_last(rs.getString("ml_last"));
-				loginMember.setMl_status("a");
-				// MemberInfo클래스의 인스턴스 loginMember에 회원정보를 저장
-			}
-			// 로그인 실패시에는 loginMember에 따로 데이터를 담지 않고 null로 리턴
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

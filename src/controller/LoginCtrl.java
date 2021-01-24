@@ -24,12 +24,11 @@ public class LoginCtrl extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		// 사용자가 입력한 값이 들어있는 컨트롤(uid, pwd)의 값을 각각 uid와 pwd로 받음
 		// 로그인에 필요한 아이디와 비밀번호를 문자열로 받아 옴
-
 		LoginSvc loginSvc = new LoginSvc();
 		// LoginSvc 형 인스턴스 loginSvc를 선언 및 생성
 		// 로그인에 필요한 작업을 위해 로그인 기능의 메소드를 가진 인스턴스 생성
-
-		MemberInfo loginMember = loginSvc.getLoginMember(uid, pwd);
+		
+		MemberInfo loginMember = loginSvc.getLoginMember(response, uid, pwd);
 		// 사용자에게 받은 아이디와 비밀번호를 인수로 하는 loginSvc 인스턴스의 
 		// getLoginMember() 메소드를 실행하고 그 결과를 loginMember에 담음
 		// loginMember에는 로그인에 성공한 회원의 데이터가 담겨 있음
@@ -53,7 +52,7 @@ public class LoginCtrl extends HttpServlet {
 			// PrintWriter 형 인스턴스 out을 생성(사용자에게 응답하는 객체)
 
 			out.println("<script>");
-			out.println("alert('로그인에 실패했습니다.');");
+			out.println("alert('로그인에 실패했습니다.\n 아이디 혹은 비밀번호를 확인해주세요.');");
 			out.println("history.back();");
 			out.println("</script>");
 		}

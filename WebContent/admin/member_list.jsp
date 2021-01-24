@@ -8,7 +8,7 @@ MemberPageInfo memberPageInfo = (MemberPageInfo)request.getAttribute("memberPage
 
 String schtype = memberPageInfo.getSchtype();	// 검색조건(상품코드, 상품명)
 String keyword = memberPageInfo.getKeyword();	// 검색어
-String gender = memberPageInfo.getGender();	// 검색어 성별
+String gender = memberPageInfo.getGender();		// 검색어 성별
 String ord = memberPageInfo.getOrd();			// 정렬조건
 
 
@@ -41,6 +41,7 @@ int rcnt = memberPageInfo.getRcnt();	// 검색된 게시물 개수
 schArgs = "&psize=" + psize + schArgs;
 args = "&cpage=" + cpage + schArgs;
 
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -59,7 +60,7 @@ function chkAll(all) {
 <body>
 <h2>회원관리 관리자 페이지</h2>
 <form name="adminMFrm" action="" method="get">
-	<table width="700" cellpadding="5">
+	<table width="1000" cellpadding="5">
 		<tr>
 			<td align="right">
 				<select name="schtype">
@@ -74,7 +75,7 @@ function chkAll(all) {
 		</tr>
 	</table>
 	<div align="left">
-			총 회원수 []
+			총 회원수 [<%=memberPageInfo.getRcnt() %>]
 	</div>
 
 <table width="1000" cellpadding="5">

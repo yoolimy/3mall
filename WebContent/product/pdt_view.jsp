@@ -16,7 +16,7 @@ id		= request.getParameter("id");		isview	= request.getParameter("isview");
 schtype = request.getParameter("schtype");	keyword = request.getParameter("keyword");
 bcata	= request.getParameter("bcata");	scata	= request.getParameter("scata");
 stre	= request.getParameter("stre");		pop		= request.getParameter("pop");
-rentDate= request.getParameter("rentDate");
+rentDate= request.getParameter("rentDate"); 
 if (rentDate == null) rentDate = "1";
 
 String args = "?cpage=" + cpage + "&psize=" + psize;
@@ -52,16 +52,17 @@ int price = pdtInfo.getPl_price() * Integer.parseInt(rentDate);
 <style>
 #thImg img { margin:10px; }
 #cal { 
-width:350px; height:300px; background:#ecedeb; overflow:auto; position:absolute; 
-top:360px; left:500px; border:2px dotted;
+width:380px; height:350px; background:#ecedeb; overflow:auto; position:absolute; 
+top:297px; left:430px; border:2px dotted;
 }
 #buttons { border:0px; }
 
 </style>
 <script>
+
 function showImg(imgName) {
 	var bigImg = document.getElementById("bigImg");
-	bigImg.src = "/3mall/product/pdt_img/" + imgName;
+	bigImg.src = "./product/pdt_img/" + imgName;
 }
 
 function changeDate(cal) {
@@ -85,8 +86,8 @@ function hideSchedule(cal) {
 	obj.style.display = "none";
 }
 
-function sbmtDate(date) { 
-	var plusDate = parseInt(document.frmPdt.rentDate.value);
+function sbmtDate(date, val) { 
+	var plusDate = parseInt(document.frmSchDate.rentDate.value);
 	var dt = new Date(date);
 	document.frmPdt.sdate.value = date;
 	dt.setDate(dt.getDate() + plusDate);
@@ -95,29 +96,57 @@ function sbmtDate(date) {
 	if (parseInt(arrNewDate[1]) < 10) 	arrNewDate[1] = "0" + arrNewDate[1];
 	if (parseInt(arrNewDate[2]) < 10) 	arrNewDate[2] = "0" + arrNewDate[2];
 	document.frmPdt.edate.value = (arrNewDate[0] + "-" + arrNewDate[1] + "-" + arrNewDate[2]).substring(0,10); 
+	document.frmPdt.rentDate.value = val;
 	document.getElementById('cal').style.display = "none";
 }
 
 function howMuch() {
-	document.frmPdt.submit();
+	document.frmSchDate.submit();
+}
+function goCart() {	// 장바구니에 담기 버튼 클릭시
+	var frm = document.frmPdt;
+<%
+if (loginMember == null) {	// 로그인을 하지 않은 상태일 경우
+	session.setAttribute("url", "cart_in.ord");
+%>
+	frm.action = "login_form.jsp";
+<% } else {	// 로그인을 한 상태일 경우 %>
+	frm.action = "cart_in.ord";
+<% } %>
+	frm.submit();
+}
+
+
+function goDirect() {	// 바로 구매하기 버튼 클릭시
+	var frm = document.frmPdt;
+<%
+if (loginMember == null) {	// 로그인을 하지 않은 상태일 경우
+	session.setAttribute("url", "order_form.ord");
+%>
+	frm.action = "login_form.jsp";
+<% } else {	// 로그인을 한 상태일 경우 %>
+	frm.action = "order_form.ord";
+<% } %>
+	frm.submit();
 }
 </script>
 </head>
 <body>
-<h2>상품 상세보기 화면</h2>
-<table width="800" cellpadding="5">
+<%@ include file="../header.jsp" %>
+<div class="main">
+<table width="800" cellpadding="5" align="center">
 <tr>
 <td width="40%" align="center" valign="middle">
 	<table width="100%">
 	<tr><td align="center" valign="middle">
-		<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_mainimg() %>" width="400" height="480" id="bigImg" />
+		<img src="product/pdt_img/<%=pdtInfo.getPl_mainimg() %>" width="400" height="480" id="bigImg" />
 	</td></tr>
 	<tr><td align="center" valign="middle" id="thImg">
-		<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_mainimg() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_mainimg() %>');" />
+		<img src="product/pdt_img/<%=pdtInfo.getPl_mainimg() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_mainimg() %>');" />
 <% if (pdtInfo.getPl_img1() != null && !pdtInfo.getPl_img1().equals("")) { %>
-		<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_img1() %>');" /><% } %>
+		<img src="product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_img1() %>');" /><% } %>
 <% if (pdtInfo.getPl_img2() != null && !pdtInfo.getPl_img2().equals("")) { %>
-		<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_img2() %>');" /><% } %>
+		<img src="product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="100" height="120" onclick="showImg('<%=pdtInfo.getPl_img2() %>');" /><% } %>
 	</td></tr>
 	</table>
 </td>
@@ -132,22 +161,17 @@ function howMuch() {
 	<tr><td>상세정보</td><td><%=pdtInfo.getPl_detail() != null? pdtInfo.getPl_detail().replace(",", "<br /> ") : "" %>
 	<form name="frmPdt" action="pdt_view.pdt<%=args %>&id=<%=id %>" method="post">
 	<input type="hidden" name="id" value="<%=id %>" />
+	<input type="hidden" name="rentDate" value="" />
 	<input type="hidden" name="args" value="<%=args %>" />
 	<input type="hidden" name="price" value="" />
 	</td></tr>
-	<tr><td>대여 일수</td>
-	<td>
-		<input type="radio" name="rentDate" value="1" <%if (rentDate.equals("1")) { %>checked="checked" <%} %> onclick="howMuch()"/> 1일 &nbsp;&nbsp;&nbsp;
-		<input type="radio" name="rentDate" value="3" <%if (rentDate.equals("3")) { %>checked="checked" <%} %> onclick="howMuch()"/> 3일 &nbsp;&nbsp;&nbsp;
-		<input type="radio" name="rentDate" value="7" <%if (rentDate.equals("7")) { %>checked="checked" <%} %> onclick="howMuch()" /> 7일 &nbsp;&nbsp;&nbsp;
-	</td>
-	</tr>
+	
 	<tr><td>날짜 선택</td><td>	
-	<input type="text" name="sdate" id="sdate" class="date" onclick="showSchedule('cal')"/> 부터&nbsp;
-	<input type="text" name="edate" id="edate" class="date" /> 까지
+	<input type="text" name="sdate" id="sdate" class="date" size="8" onclick="showSchedule('cal')"/> 부터&nbsp;
+	<input type="text" name="edate" id="edate" class="date" size="8"/> 까지
 	</td></tr>
-	<tr><td colspan="2" align="right">
-	<%=price %> 원
+	<tr><td colspan="2" align="right" height="320">
+	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><%=price %> 원
  	<tr><td colspan="2" align="center">
 	<input type="button" value="장바구니에 담기" onclick="goCart();" />
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -159,8 +183,8 @@ function howMuch() {
 </tr>
 <tr><td colspan="2" align="center"><hr width="100%" /></td></tr>
 <tr><td colspan="2" align="center">
-	<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="780" /><br /><br />
-	<img src="/3mall/product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="780" /><br /><br />
+	<img src="product/pdt_img/<%=pdtInfo.getPl_img1() %>" width="780" /><br /><br />
+	<img src="product/pdt_img/<%=pdtInfo.getPl_img2() %>" width="780" /><br /><br />
 	<%=pdtInfo.getPl_deInfo() != null ? pdtInfo.getPl_deInfo() : "" %>
 </td></tr>
 <tr><td colspan="2" align="center"><hr width="100%" /></td></tr>
@@ -168,16 +192,23 @@ function howMuch() {
 	<input type="button" value="목록" onclick="location.href='pdt_list.pdt<%=args %>';" />
 </td></tr>
 </table>
-<br /><br />
+<br />
 <div id="cal" <%
 if (pop != null && pop.equals("y")) { %>
 style="display:block"
 <%} else { %>
 	style="display:none"
 <%} %>
->
+align="center">
+<form name="frmSchDate" action="pdt_view.pdt<%=args %>&id=<%=id %>&pop=y" method="post">
 <a href="javascript:hideSchedule('cal')">
-<img src='images/close.png' width='7%' align="right"></a><br /><br />
+<img src='images/close.png' width='7%' align="right"></a><br />
+<table width="350">
+<tr><td align="center">
+<input type="radio" name="rentDate" value="1" <%if (rentDate.equals("1")) { %>checked="checked" <%} %> onclick="howMuch()"/> 1일 &nbsp;&nbsp;&nbsp;
+<input type="radio" name="rentDate" value="3" <%if (rentDate.equals("3")) { %>checked="checked" <%} %> onclick="howMuch()"/> 3일 &nbsp;&nbsp;&nbsp;
+<input type="radio" name="rentDate" value="7" <%if (rentDate.equals("7")) { %>checked="checked" <%} %> onclick="howMuch()" /> 7일
+</td></tr></table><br />
 <%
 sdate.set(year, month - 1, 1);
 //입력받은 년도와 월을 이용하여 시작일을 지정(월은 -1을 해야 함)
@@ -188,7 +219,7 @@ edate.add(Calendar.DATE, -1);	// 다음달 1일에서 하루를 뺀 날짜(시�
 startWeekDay = sdate.get(Calendar.DAY_OF_WEEK); // 시작일의 요일번호이자 1일의 시작 위치
 endDay = edate.get(Calendar.DATE); // 말일
 %>
-<form name="frmSchDate" action="pdt_view.pdt<%=args %>&id=<%=id %>&pop=y" method="post">
+
 
 <table width="350">
 <tr><td align="center">
@@ -250,7 +281,7 @@ for (int i = 1, n = startWeekDay ; i <= endDay ; i++, n++ ){
 	if (erent.equals(today))	disabled = "";
 	}
 	out.print("<td valign='center'>" + 
-	"<input type='button' onclick='sbmtDate(\""+ year + "-" + mon + "-" + day + "\")' value='"+ i + "' id='buttons' " + disabled + " /></td>");
+	"<input type='button' onclick='sbmtDate(\""+ year + "-" + mon + "-" + day + "\", frmSchDate.rentDate.value)' value='"+ i + "' id='buttons' " + disabled + " /></td>");
 
 	if (n % 7 == 0)	out.println("</tr>");
 	// 일주일이 지났으므로 다음 줄로 내림
@@ -265,6 +296,7 @@ for (int i = 1, n = startWeekDay ; i <= endDay ; i++, n++ ){
 }
 %>
 </table>
+</div>
 </div>
 </body>
 </html>

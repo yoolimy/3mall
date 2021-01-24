@@ -9,7 +9,7 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="style.css" />
+
 <title>Insert title here</title>
 
 </head>
@@ -23,18 +23,21 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <%
                 if (loginMember == null) {
                 %>
-                <a href="login_form.jsp">로그인</a>
+                <a href="login_form.jsp">로그인</a>&nbsp;
+				<a href="join_form.jsp">회원가입</a>
                 <%
                 } else { %>
                 <%=loginMember.getMl_id() %>(<%=loginMember.getMl_name() %>)님 환영합니다.<br />
 
-                <a href="logout">로그아웃</a>
+                <a href="logout">로그아웃</a>&nbsp;
+				<a href="mypage_view.mem">마이페이지</a>
                 <%
                 }
                 %>
             </div>
             <div class="header-menu">
                 <a href="pdt_list.pdta">상품목록-백엔드</a>
+				<a href="member_list.amem">회원관리-백엔드</a>
                 <hr />
                 <a href="pdt_list.pdt">상품목록-프론트</a>
                 <hr />
@@ -43,7 +46,9 @@ MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
                 <a href="pdt_list.pdt?bcata=3">장신구</a>
                 <a href="review_list.review">리뷰 게시판</a>
                 <hr />
-                <a href="member_list.amem">회원 목록</a>
+                <a href="main.jsp">메인화면</a>
+                <hr />
+                <a href="cart_list.ord">장바구니</a>
             </div>
         </div>
         <div class="main">
