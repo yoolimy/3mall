@@ -4,7 +4,7 @@
 <%@ page import="vo.*" %>
 <%
 // dispatch방식으로 이동했기 때문에 이전 파일의 request와 response를 사용할 수 있음
-
+MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
 ArrayList<ReviewInfo> reviewList = (ArrayList<ReviewInfo>)request.getAttribute("reviewList");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 
@@ -45,6 +45,8 @@ a:focus { color:#f00; text-decoration:underline; }
 </style>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
+<div class="main" align="center">
 <h2>리뷰 게시판</h2>
 <form name="frmSch" method="get">
 <table width="700" cellpadding="5">
@@ -149,9 +151,10 @@ if (rcnt > 0) {
 %>
 </td>
 <td width="10%">
-   <input type="button" value="글 등록" onclick="location.href='brd_form.review?wtype=in';" />
+   <input type="button" value="글 등록" onclick="location.href='review_form.review?wtype=in';" />
 </td>
 </tr>
 </table>
+</div>
 </body>
 </html>

@@ -1,26 +1,13 @@
 package vo;
 
 public class ReviewInfo {
-	private int rl_idx, rl_rate, rl_reply;
-	private String pl_id, ml_id, rl_title, rl_content, rl_img, rl_rept, rl_ip, rl_date, rl_status, catabig, plname;
-	
+	private int rl_idx;
+	private String pl_id, ml_id, rl_title, rl_content, rl_img, rl_rept, rl_ip, rl_date, rl_status, catabig, plname, ml_name;
 	public int getRl_idx() {
 		return rl_idx;
 	}
 	public void setRl_idx(int rl_idx) {
 		this.rl_idx = rl_idx;
-	}
-	public int getRl_rate() {
-		return rl_rate;
-	}
-	public void setRl_rate(int rl_rate) {
-		this.rl_rate = rl_rate;
-	}
-	public int getRl_reply() {
-		return rl_reply;
-	}
-	public void setRl_reply(int rl_reply) {
-		this.rl_reply = rl_reply;
 	}
 	public String getPl_id() {
 		return pl_id;
@@ -88,4 +75,12 @@ public class ReviewInfo {
 	public void setPlname(String plname) {
 		this.plname = plname;
 	}
+	public String getMl_name() {
+		return ml_name;
+	}
+	public void setMl_name(String ml_name) {
+		this.ml_name = ml_name;
+	}
+	
+	
 }

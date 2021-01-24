@@ -28,14 +28,12 @@ public class ReviewCtrl extends HttpServlet {
 		switch (command) {
 			case "/review_list.review" :	// 리뷰게시판 목록 보기
 				action = new ReviewListAction();	break;
-		//	case "/brd_form.free" :		// 게시글 등록/수정 폼
-		//		action = new FreeFormAction();	break;
-		//	case "/brd_view.free" :		// 게시글 보기
-		//		action = new FreeViewAction();	break;
-		//	case "/brd_pwd.free" :		// 비밀번호 입력 폼
-		//		action = new FreePwdAction();	break;
-		//	case "/brd_proc.free" :		// 게시글 처리(등록, 수정, 삭제)
-		//		action = new FreeProcAction();	break;
+			case "/review_form.review" :		// 게시글 등록/수정 폼
+				action = new ReviewFormAction();	break;
+			case "/review_view.review" :		// 게시글 보기
+				action = new ReviewViewAction();	break;
+			case "/review_proc.review" :		// 게시글 처리(등록, 수정, 삭제)
+				action = new ReviewProcAction();	break;
 		}
 
 		try {

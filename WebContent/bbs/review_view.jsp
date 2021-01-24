@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>
 <%
+ArrayList<ReviewInfo> reviewList = (ArrayList<ReviewInfo>)request.getAttribute("reviewList");
 ReviewInfo article = (ReviewInfo)request.getAttribute("article");
 if (article == null) {
 // 저장된 게시물이 없으면
@@ -37,21 +39,23 @@ if (schtype != null &&  keyword != null && !keyword.equals("")) {
 </style>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
+<div class="main">
 <table width="700" align="center" cellpadding="5" cellspacing="0" id="top">
 <tr>
-<th width="30%">[카테고리 명] [상품명]</th>
+<th width="30%">[<%=article.getCatabig() %>] [<%=article.getPlname() %>]</th>
 <th width="*">[<%=article.getRl_title() %>]</th>
-<th width="20%">[<%=uid %>]</th>
+<th width="20%">[<%=article.getMl_id() %>]</th>
 <th width="20%">[<%=article.getRl_date().substring(2,10).replace('.', '-') %>]</th>
 </tr>
 </table>
 <table width="700" height="300" align="center">
 <tr>
-<td width="40%" align="center"><img src="1.jpg"/></td>
+<td width="40%" align="center"><img src="product/pdt_img/ㄱ.버선1-1.PNG" width="200"/></td>
 <td width="*"><%=article.getRl_content() %></td>
 </tr>
 <tr>
-<td><input type="button" value="목록" onclick="location.href='brd_list.review<%=args %>';" /></td>
+<td><input type="button" value="목록" onclick="location.href='review_list.review<%=args %>';" /></td>
 <%
 boolean isPms = false;	// 수정 및 삭제 권한이 있는지 여부를 저장할 변수
 String link1 = null, link2 = null;
@@ -59,35 +63,27 @@ String link1 = null, link2 = null;
 
 if (uid != null && uid.equals(article.getMl_id())) {
 	isPms = true;
-	link1 = "location.href='brd_form.review" + args + "&wtype=up&idx=" + idx + 
-	"&ismember=" + article.getRl_ismember() + "';";
+	link1 = "location.href='brd_form.review" + args + "&wtype=up&idx=" + idx + "';";
 	// 로그인한 아이디로 검사했으므로 바로 수정폼으로 이동
 	link2 = "notCool(" + idx + ");";
 	// 삭제는 물어본후 실행하도록 자바스크립트 함수를 연결
 	
 }
 
-if (isPms) {	// 수정 및 삭제 권한이 있거나 비회원 글이면
-	if (article.getRl_ismember().equals("y")) {
-	// 회원이 등록한 글일 경우(현재 글이 로그인한 회원의 글이면)
 %>
 <script>
-
 function notCool(idx) {
 	if (confirm("정말 삭제하시겠습니까?")) {
-		location.href="brd_proc.review?wtype=del&idx="  + idx + "&ismember=<%=article.getRl_ismember()%>";
+		location.href="review_proc.review?wtype=del&idx=" + idx;
 	}
 }
-
 </script>
 <%
-	}
 %>
-	<td><input type="button" value="수정" onclick="<%=link1 %>" />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<td><input type="button" value="삭제" onclick="<%=link2 %>" />
-<% } %>
+	<td align="right"><input type="button" value="수정" onclick="<%=link1 %>" /></td>
+	<td align="right"><input type="button" value="삭제" onclick="<%=link2 %>" /></td>
 </tr>
 </table>
+</div>
 </body>
 </html>
