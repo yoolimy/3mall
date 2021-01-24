@@ -22,6 +22,6 @@ public class LogoutCtrl extends HttpServlet {
 		// 세션에 있는 모든 속성(attribute)을 삭제
 		// 로그인/아웃과 상관없는 세션 속성이 있을 경우 
 		// removeAttribute()로 특정 속성만 삭제하면 됨
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("main.jsp");
 	}
 }

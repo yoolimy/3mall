@@ -79,6 +79,7 @@ $(document).ready(function() {
     } else { %>
     <%=loginMember.getMl_id() %>(<%=loginMember.getMl_name() %>)님 환영합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="logout"  style="text-decoration:none; font-size:0.8em;" >로그아웃</a>
+	<a href="mypage_view.mem">마이페이지</a>
     <%
     }
     %>

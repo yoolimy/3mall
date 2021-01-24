@@ -22,6 +22,8 @@ if (loginMember != null) { // 로그인 한 회원일 경우
 	e2 = arrEmail[1];
 }
 
+//asterisk 이미지 삽입
+String img = "&nbsp;<img src=\"images/asterisk.png\" width=\"5\" height=\"5\" align=\"absmiddle\" />";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -81,37 +83,47 @@ function execDaumPostcode(num) {
  }).open();
 }
 </script>
+<style>
+table { margin-left:370px; }
+h1 { margin-left:370px; text-align:left; color:#383226;}
+th { color:#383226; text-align:left; padding:8px; } 
+table td .box {  border-bottom:1px solid #383226; border-right:0; border-left:0; border-top:0; padding:7px;}
+table span { font-size:12px; }
+table td .buttonBox { margin-left:100px; cursor:pointer; margin-top:10px; }
+</style>
 </head>
 <body>
-<h2>마이페이지 폼</h2>
+<%@ include file="../header.jsp" %>
+<div class="main">
+<h1>마이페이지</h1>
 <form name="frmJoin" id="frmJoin" action="mypage_proc.mem" method="post" onsubmit="return chkInfo(this);">
 <input type="hidden" name="id" value="<%=loginMember.getMl_id() %>" />
 <table cellpadding="5">
 	<tr>
-		<th>아이디</th>
+		<th>아이디<%=img %></th>
 		<td><%=loginMember.getMl_id()%></td>
 	</tr>
 	<tr>
-		<th>이름</th>
-		<td><input type="text" name="name" value="<%=name %>" /></td>
+		<th>이름<%=img %></th>
+		<td><input type="text" name="name" value="<%=name %>" class="box" /></td>
 	</tr>
 	<tr>
-		<th>비밀번호</th>
+		<th>비밀번호<%=img %></th>
 		<td>
-			<input type="password" name="pwd" value="" id="pwd1" onchange="testPwd1();" /><br/>
+			<input type="password" name="pwd" value="" id="pwd1" class="box"  onchange="testPwd1();" /><br/>
 			<span id="chkPwd"></span>
 		</td>
 	</tr>
 	<tr>
-		<th>비밀번호 확인</th>
+		<th>비밀번호 확인<%=img %></th>
 		<td>
-			<input type="password" name="pwd2" value="" id="pwd2" onchange="testPwd2();"/><br/>
+			<input type="password" name="pwd2" value="" id="pwd2" class="box"  onchange="testPwd2();"/><br/>
 			<span id="pwdMsg"></span>
 		</td>
 
 	</tr>
 	<tr>
-		<th>전화번호</th>
+		<th>전화번호<%=img %></th>
 		<td>
 			<select name="p1">
 				<option value="010" <%if (p1.equals("010")) { %>selected="selected"<%} %>>010</option>
@@ -124,9 +136,9 @@ function execDaumPostcode(num) {
 		</td>
 	</tr>
 	<tr>
-		<th>이메일</th>
+		<th>이메일<%=img %></th>
 		<td>
-			<input type="text" name="e1"  value="<%=e1%>" /> @
+			<input type="text" name="e1"  value="<%=e1%>" class="box"  /> @
 			<select name="e2">
 				<option value="naver.com" <%if (e2.equals("naver.com")) { %>selected="selected"<%} %>>네이버</option>
 				<option value="gmail.com" <%if (e2.equals("gmail.com")) { %>selected="selected"<%} %>>지메일</option>
@@ -138,11 +150,11 @@ function execDaumPostcode(num) {
 		</td>
 	</tr>
 	<tr>
-		<th>생년월일</th>
-		<td><input type="text" name="birth" value="<%=loginMember.getMl_birth()%>" onkeyup="onlyNumber(this);" />(yyyymmdd)</td>
+		<th>생년월일<%=img %></th>
+		<td><input type="text" name="birth" class="box"  value="<%=loginMember.getMl_birth()%>" onkeyup="onlyNumber(this);" />(yyyymmdd)</td>
 	</tr>
 	<tr>
-		<th>성별</th>
+		<th>성별<%=img %></th>
 		<td>
 			<input type="radio" name="gender" value="M" <%if (loginMember.getMl_gender().equals("M")) { %>checked="checked"<%} %> />남
 			<input type="radio" name="gender" value="F" <%if (loginMember.getMl_gender().equals("F")) { %>checked="checked"<%} %> />여
@@ -221,12 +233,13 @@ function execDaumPostcode(num) {
 	</tr>
 <%	}	%>
 	<tr>
-		<th colspan="2">
-			<input type="submit" value="수정 하기" />
-			<input type="button" value="취소" onclick="location.href='history.back()';" />
-		</th>
+		<td colspan="2">
+			<input type="submit" value="수정 하기" class="buttonBox" />
+			<input type="button" value="취소" class="buttonBox" onclick="location.href='main.jsp';" />
+		</td>
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

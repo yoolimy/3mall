@@ -15,8 +15,8 @@ request.setCharacterEncoding("utf-8");
 <title>Insert title here</title>
 <style>
 h1 { text-align:center; color:#383226;}
-th { color:#383226;font-size:20px; }
-table td .buttonBox { background-color:#efede9; font-weight:bold; font-size:20px; color:#383226; border:0; weight:40px; height:60px; margin:15px 15px; cursor:pointer; }
+th { color:#383226; font-size:20px; }
+table td .buttonBox { background-color:#efede9; font-weight:bold; font-size:18px; color:#383226; border:0; weight:40px; height:65px; margin:15px 15px; cursor:pointer; }
 table td .buttonBox:hover { background-color:#383226; color:#efede9; font-weight:bold; cursor:pointer; }
 table td .inputBox {  border-bottom:1px solid #383226; border-right:0; border-left:0; border-top:0; }
 </style>
@@ -43,7 +43,7 @@ function chkData(chk) {
 <body>
 <%@ include file="../header.jsp" %>
 <div class="main">
-	<h1>Login</h1>
+	<h1>로그인</h1>
 	<form name="frmLogin" action="login" method="post" onsubmit="return chkData(this);">	<!-- action="login" : 클래스호출(자바파일) -->
 		<table cellpadding="5" align="center">
 			<tr>

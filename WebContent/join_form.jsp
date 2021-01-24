@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%
+
+MemberInfo loginMember = (MemberInfo)session.getAttribute("loginMember");
 String user_id = (String)session.getAttribute("uid");
 if (user_id != null) {
 	out.println("<script>");
@@ -111,31 +113,41 @@ function onlyNumber(obj) {
 	}
 }
 </script>
+<style>
+table { margin-left:370px; }
+h1 { margin-left:370px; text-align:left; color:#383226;}
+th { color:#383226; text-align:left; padding:8px; } 
+table td .box {  border-bottom:1px solid #383226; border-right:0; border-left:0; border-top:0; padding:7px;}
+table span { font-size:12px; }
+table td .buttonBox { margin:15px 15px; cursor:pointer; margin-top:10px; }
+</style>
 </head>
 <body>
-<h2>회원가입 폼</h2>
+<%@ include file="../header.jsp" %>
+<div class="main" >
+<h1>회원가입</h1>
 <form name="frmJoin" action="join_proc.mem" method="post" onsubmit="return chkData(this);">
 <input type="hidden" name="idChk" id="idChk" value="N" />
-<table cellpadding="5" border="1">
+<table cellpadding="5">
 	<tr>
 		<th>아이디<%=img %></th>
-		<td><input type="text" name="uid" id="uid" onkeyup="chkDupId();" />
-	<br /><span id="idMsg">아이디는 4~20자 이내의 영문, 숫자 조합으로 입력하세요.</span></td>
+		<td><input type="text" name="uid" id="uid" class="box" onkeyup="chkDupId();" />
+	<br /><span id="idMsg">* 아이디는 4~20자 이내의 영문, 숫자 조합으로 입력하세요.</span></td>
 	</tr>
 	<tr>
 		<th>이름<%=img %></th>
-		<td><input type="text" name="name" /></td>
+		<td><input type="text" name="name" class="box"  /></td>
 	</tr>
 	<tr>
 		<th>비밀번호<%=img %></th>
-		<td><input type="password" name="pwd" id="pwd1" onchange="testPwd1();" /><br />
-			<span id="chkPwd">비밀번호는 6~20자 이내의 영문, 숫자 조합으로 입력하세요.</span>
+		<td><input type="password" name="pwd" id="pwd1" class="box"  onchange="testPwd1();" /><br />
+			<span id="chkPwd">* 비밀번호는 6~20자 이내의 영문, 숫자 조합으로 입력하세요.</span>
 		</td>
 	</tr>
 	<tr>
 		<th>비밀번호 확인<%=img %></th>
 		<td>
-			<input type="password" name="pwd2" id="pwd2" onchange="testPwd2();"/><br />
+			<input type="password" name="pwd2" id="pwd2" class="box"  onchange="testPwd2();"/><br />
 			<span id="pwdMsg"></span>
 		</td>
 	</tr>
@@ -155,7 +167,7 @@ function onlyNumber(obj) {
 	<tr>
 		<th>이메일<%=img %></th>
 		<td>
-			<input type="text" name="e1" /> @
+			<input type="text" name="e1" class="box"  /> @
 			<select name="e2">
 				<option selected="selected">도메인 선택</option>
 				<option value="naver.com">네이버</option>
@@ -163,7 +175,7 @@ function onlyNumber(obj) {
 				<option value="hanmail.net">한메일</option>
 				<option value="nate.com">네이트</option>
 			</select>
-			<input type="checkbox" value="y" name="agrEmail" /> 메일 수신 동의 
+			<input type="checkbox" value="y" name="agrEmail" /><label class="labelFont">메일 수신 동의</label> 
 		</td>
 	</tr>
 	<tr>
@@ -198,16 +210,16 @@ function onlyNumber(obj) {
 	<tr>
 		<th>성별<%=img %></th>
 		<td>
-			<input type="radio" name="gender" value="M" />남
-			<input type="radio" name="gender" value="F" />여
+			<input type="radio" name="gender" value="M" /><label>남</label>
+			<input type="radio" name="gender" value="F" /><label>여</label>
 		</td>
 	</tr>
 	<tr>
 		<th>주소1</th>
 		<td>
+			<input type="radio" name="basicAddr" value="first" id="addrBtn" checked="checked"/>&nbsp;<label class="labelFont">기본배송지</label><br />
 			<input type="text" name="zip" id="postcode" placeholder="우편번호" />
-			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" />
-			<input type="radio" name="basicAddr" value="first" checked="checked"/>&nbsp;기본배송지<br />
+			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" /><br />
 			<input type="text" name="addr1" id="roadAddress" placeholder="도로명주소" /><br />
 			<span id="guide" style="color:#999;display:none;font-size:5px;"></span>
 			<input type="text" name="addr2" id="detailAddress" placeholder="상세주소" />
@@ -215,11 +227,12 @@ function onlyNumber(obj) {
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="회원 가입" />
-			<input type="reset" value="취소" onclick="location.href='history.back()';" />
+			<input type="submit" value="회원 가입" class="buttonBox"  />
+			<input type="reset" value="취소" class="buttonBox"  onclick="location.href='history.back()';" />
 		</td>
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>
