@@ -200,11 +200,13 @@ $(document).ready(function() {
     <%
     if (loginMember == null) {
     %>
-    <a href="login_form.jsp" style="text-decoration:none; font-size:0.8em;">로그인</a>
+    <a href="login_form.jsp"  style="text-decoration:none; font-size:0.8em;">로그인</a>
     <%
     } else { %>
     <%=loginMember.getMl_id() %>(<%=loginMember.getMl_name() %>)님 환영합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="logout"  style="text-decoration:none; font-size:0.8em;" >로그아웃</a>
+	<a href="mypage_view.mem" style="text-decoration:none; font-size:0.8em;">마이페이지</a>
+	<a href="cart_list.ord" style="text-decoration:none; font-size:0.8em;">장바구니</a>
     <%
     }
     %>
@@ -220,7 +222,7 @@ $(document).ready(function() {
          <li><a href="pdt_list.pdt?bcata=2"><b>남성한복</b></a></li>
          <li><a href="pdt_list.pdt?bcata=3"><b>장신구</b></a></li>
          <li><a href="review_list.review"><b>리뷰 게시판</b></a></li>
-         <li><a href="member_list.amem"><b>1:1 문의</b></a></li>
+         <li><a href="#"><b>1:1 문의</b></a></li>
          <li><a href="rantSystem.jsp"><b>대여 시스템</b></a></li>
      </ul>
     </nav>
