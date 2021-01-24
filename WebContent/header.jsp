@@ -33,7 +33,6 @@ body { margin:0; color:#000; padding-top:30px; }
 .primary-nav li { float:left; }
 .primary-nav a { display:block; padding:0 1.36em; }
 .primary-nav a:hover { background:#cccac4; }
-
 </style>
 <script src="jquery-3.5.1.js"></script>
 <script src="./jquery-ui-1.10.3.custom.min.js"></script>
@@ -45,7 +44,6 @@ $(document).ready(function() {
 		$header = $(this),			// .page-header 객체를 변수에 담음
 		headerOffsetTop = $header.offset().top;
 		// .page-header 객체의 최상위 좌표값을 변수에 담음
-
 		$window.on('scroll', function() {
 		// 창 객체(window)에 scroll 이벤트가 발생하면
 			if ($window.scrollTop() > headerOffsetTop) {
@@ -58,7 +56,6 @@ $(document).ready(function() {
 				// $header에서 sticky라는 클래스를 제거
 			}
 		});
-
 		$window.trigger('scroll');
 		// window객체에 scroll이벤트를 발생시킴
 	});
@@ -79,7 +76,8 @@ $(document).ready(function() {
     } else { %>
     <%=loginMember.getMl_id() %>(<%=loginMember.getMl_name() %>)님 환영합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="logout"  style="text-decoration:none; font-size:0.8em;" >로그아웃</a>
-	<a href="mypage_view.mem">마이페이지</a>
+	<a href="mypage_view.mem" style="text-decoration:none; font-size:0.8em;">마이페이지</a>
+	<a href="cart_list.ord" style="text-decoration:none; font-size:0.8em;">장바구니</a>
     <%
     }
     %>
