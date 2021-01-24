@@ -136,7 +136,7 @@ create table t_product_list (
 		references t_admin_list(al_idx) 	-- 관리자idx 외래키 지정
 );
 insert into t_product_list (pl_id, cs_idx, pl_name, pl_price, pl_mainimg, pl_img1, pl_img2, pl_srent, pl_erent, al_idx) 
-values ('1066pdt001', 1066, '여성한복 2', '33000', '한복.jpg', 'w3-1.jpg', 'w3-2.jpg', '2020-01-18', '2020-01-21', '1');
+values ('1066pdt001', 1066, '여성한복 2', '33000', 'w1-1.jpg', 'w3-1.jpg', 'w3-2.jpg', '2020-01-18', '2020-01-21', '1');
 select * from t_product_list;
 
 -- 상품 주문

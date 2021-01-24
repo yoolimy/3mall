@@ -89,7 +89,7 @@ if (pdtList != null && rcnt > 0) {	// 검색결과가 있으면
 %>
 <td>
 	<div class="pdtBox<%=max%>">
-		<%=lnk %><img src="/3mall/product/pdt_img/<%=pdtList.get(i).getPl_mainimg() %>" width="<%=max == 3 ? 250 : 180 %>" height="<%=max == 3 ? 180 : 150 %>" /></a><br />
+		<%=lnk %><img src="./product/pdt_img/<%=pdtList.get(i).getPl_mainimg() %>" width="<%=max == 3 ? 250 : 180 %>" height="<%=max == 3 ? 180 : 150 %>" /></a><br />
 		<%=lnk + pdtList.get(i).getPl_name() %></a><%=soldout %><br />판매가 : <%=price %> 원 (1일)
 	</div>
 </td>

@@ -192,7 +192,7 @@ String lnk = "";
 <td><input type="checkbox" name="chk" value="<%=pdtList.get(i).getPl_id() %>" checked="checked" /></td>
 <td><%=pdtList.get(i).getCb_name() + "<br />( " + pdtList.get(i).getCs_name() + " )"%></td>
 <td><%=pdtList.get(i).getPl_id() %>
-<td><img src="/3mall/product/pdt_img/<%=pdtList.get(i).getPl_img1() %>"  height="70" /></td>
+<td><img src="./product/pdt_img/<%=pdtList.get(i).getPl_mainimg() %>" height="70" /></td>
 <td><%=lnk + pdtList.get(i).getPl_name()%></a></td>
 <td><%=pdtList.get(i).getPl_price()%></td>
 <td><%=pdtList.get(i).getPl_rent() == 1 ? "대여중" : "재고있음" %></td>
